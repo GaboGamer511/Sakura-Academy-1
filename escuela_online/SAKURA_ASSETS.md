@@ -1,7 +1,16 @@
 # Sakura Academy — inventario y criterios de calidad 3D
 
-## Dirección artística
+## Dirección artística y escala
 Sakura Academy busca un acabado anime 3D moderno y detallado. **No se utilizará low poly como estilo artístico.** La optimización debe conservar la calidad visual, no reemplazarla por modelos simples.
+
+El mapa será de tamaño mediano y estará densamente ambientado. La academia será claramente la zona más grande e imponente. Las demás áreas serán destinos compactos con identidad propia: distrito urbano, zona de santuarios/templos, costa y naturaleza. Evitar kilómetros de terreno vacío.
+
+## Online como requisito
+Todos los recursos y la organización del mundo deben considerar el modo online existente. No eliminar ni sustituir la red, la sincronización o la autoridad del proyecto para construir el mapa.
+- Revisar si las interacciones y actividades deben replicarse o permanecer locales.
+- Evitar sincronizar efectos puramente visuales que no necesiten replicación.
+- Mantener coherencia de aparición de jugadores y cambios de región.
+- Comprobar el comportamiento con varios clientes antes de declarar una función online terminada.
 
 ## Criterios obligatorios para aceptar modelos
 - Calidad de silueta y proporciones a la distancia normal de juego.
@@ -17,25 +26,26 @@ El modelo Flowering Cherry Tree de Innerscene queda **descartado**: su copa se v
 
 Buscar cerezos con copas abundantes, volumen de flores, ramas naturales y una silueta atractiva. Conviene evaluar varios modelos y variantes antes de seleccionar uno. Combinar árboles principales de alta calidad con vegetación secundaria coherente, sin recurrir a modelos low poly.
 
-## Mundo abierto: categorías de recursos
-1. Campus japonés contemporáneo: edificios, aulas, gimnasio, biblioteca, residencias, cafetería y mobiliario.
-2. Ciudad: fachadas, tiendas, viviendas, estación, plazas, calles y elementos urbanos.
-3. Cultura y patrimonio: santuarios sintoístas, torii, templos budistas, jardines, escalinatas y faroles.
-4. Costa: playas, muelles, embarcaciones, comercios costeros y acantilados.
-5. Naturaleza: cerezos frondosos, árboles, arbustos, flores, rocas, lagos, ríos y montañas.
-6. Vida del mundo: vehículos, señalización, mobiliario, objetos interactivos y recursos para NPC.
+## Recursos por región
+1. **Academia (prioridad máxima):** edificios, aulas, gimnasio, biblioteca, residencias, cafetería, patios, jardines y mobiliario.
+2. **Distrito urbano compacto:** fachadas, tiendas, viviendas, estación, plazas, calles y elementos urbanos.
+3. **Zona tradicional:** santuario sintoísta, torii, templo budista, jardines, escalinatas y faroles.
+4. **Costa:** playa, muelle, embarcaciones, comercios costeros y acantilados.
+5. **Naturaleza:** cerezos frondosos, árboles, arbustos, flores, rocas, lago, río y miradores.
+6. **Vida del mundo:** vehículos, señalización, mobiliario, objetos interactivos y recursos para NPC.
 
 ## Estado del recurso de cerezo anterior
 El candidato Flowering Cherry Tree de Innerscene fue revisado por el usuario y rechazado por su apariencia pelona. No está aprobado y no debe tratarse como recurso seleccionado ni integrado.
 
-## Optimización
-- Modelos de alta calidad cerca del jugador y LOD para distancia.
+## Optimización sin degradar calidad
+- Modelos detallados cerca del jugador y LOD para distancia.
 - Materiales compartidos y atlas para reducir cambios de material.
 - Culling y visibilidad por zonas.
 - Texturas dimensionadas según su uso real, evitando resoluciones excesivas.
 - Sombras selectivas, lightmaps y control de transparencias.
-- Carga por regiones/sectores para que el mundo abierto no consuma toda la memoria a la vez.
-- Medir rendimiento real en Godot 3.6.3 y en el PC objetivo.
+- Carga por regiones/sectores para que el mapa mediano no consuma toda la memoria a la vez.
+- Evitar replicar por red efectos cosméticos locales innecesarios.
+- Medir rendimiento, memoria y comportamiento con varios clientes en Godot 3.6.3.
 
 ## Estado de integración
 La edición disponible del repositorio permite modificar archivos de texto, pero no transferir directamente modelos 3D binarios. No afirmar que un asset está integrado hasta que el archivo exista en `models/` y haya sido importado y probado en Godot.
