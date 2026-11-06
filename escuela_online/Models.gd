@@ -5,10 +5,10 @@ extends Reference
 # Textos que indican que un archivo NO es un personaje (muebles, edificios, piezas sueltas)
 const NOT_CHARACTER = ["kenney", "furniture", "muebles", "building", "wall", "roof", "door",
 	"floor", "school", "classroom", "desk", "chair", "table", "bookcase", "hair", "beard",
-	"eyebrow", "eyes", "teeth", "tongue", "animation", "tree", "cherry", "blossom", "nature", "bush", "flower", "foliage", "plant", "vegetation", "rock", "grass"]
+	"eyebrow", "eyes", "teeth", "tongue", "animation", "tree", "cherry", "blossom", "nature", "bush", "flower", "foliage", "plant", "vegetation", "rock", "grass", "shrine", "torii", "temple", "pagoda", "dojo", "house", "town", "city", "street", "vehicle", "car", "bus", "train", "boat", "ship", "prop", "weapon", "sword", "asset", "set", "environment", "landscape", "architecture", "map"]
 
 # Textos que sugieren que SÍ es un cuerpo completo (se ponen primero en la lista)
-const BODY_HINTS = ["fullbody", "body", "character", "student", "male", "female", "player"]
+const BODY_HINTS = ["fullbody", "body", "character", "student", "male", "female", "player", "avatar", "humanoid", "npc", "person", "girl", "boy", "woman", "man"]
 
 
 static func list_models(dir_path = "res://models", exts = ["glb", "gltf"]):
@@ -53,13 +53,14 @@ static func characters():
 	var first = []
 	var rest = []
 	for p in list_models():
-		if _contains_any(p, NOT_CHARACTER):
+		var filename = p.get_file()
+		if _contains_any(filename, NOT_CHARACTER):
 			continue
-		if _contains_any(p.get_file(), BODY_HINTS):
+		# Solo aceptar cuerpos completos identificables por nombre. Esto evita
+		# asignar accidentalmente un prop, arma o pieza suelta a un jugador/NPC.
+		if _contains_any(filename, BODY_HINTS):
 			first.append(p)
-		else:
-			rest.append(p)
-	return first + rest
+	return first
 
 
 # Primer modelo (de las extensiones dadas) cuyo nombre de archivo contiene alguna palabra clave.
