@@ -35,6 +35,11 @@ echo   https://kenney-assets.itch.io/modular-buildings
 echo   https://quaternius.com/packs/universalbasecharacters.html
 echo   https://quaternius.com/packs/universalanimationlibrary.html
 echo.
+echo Pack de naturaleza Sakura recomendado (11 MB, licencia CC0):
+echo   https://riclmbr.itch.io/low-poly-trees-pack
+echo Descarga LowPolyTreesPack.zip y colocalo en _descargas.
+echo Ejecuta este .bat otra vez para extraerlo en models\LowPolyTreesPack.
+echo.
 echo Listo. Abre Godot y deja que reimporte los archivos.
 pause
 goto :eof
