@@ -21,9 +21,11 @@ func _ready():
 		# Con el kit GLB instalado no se dibujan edificios ni árboles de cubos/esferas.
 		# Se conserva únicamente una superficie base física para caminar.
 		_build_imported_campus_ground()
+		# Mantener el suelo de respaldo visible evita una pantalla vacía
+		# si el GLB carga pero sus materiales o mallas no se dibujan en GLES2.
 		var fallback_mesh = get_parent().get_node_or_null("FallbackGround")
 		if fallback_mesh:
-			fallback_mesh.visible = false
+			fallback_mesh.visible = true
 	else:
 		# Campus de respaldo solo para la primera apertura sin recursos descargados.
 		_build_ground()
@@ -61,10 +63,21 @@ func _instance_real_school_kit():
 	var imported = packed.instance()
 	imported.name = "JapaneseSchoolAndCityStreet_REAL_3D"
 	build_parent.add_child(imported)
+	if _count_mesh_instances(imported) == 0:
+		push_warning("El GLB se importó, pero no contiene MeshInstance visibles. Se usará el campus de respaldo.")
+		imported.free()
+		return false
 	if Engine.editor_hint:
 		_assign_preview_owner(imported, get_tree().edited_scene_root)
 	print("Sakura Academy: campus modular GLB real cargado")
 	return true
+
+
+func _count_mesh_instances(node):
+	var count = 1 if node is MeshInstance and node.mesh != null else 0
+	for child in node.get_children():
+		count += _count_mesh_instances(child)
+	return count
 
 func _mat(color):
 	var key = color.to_html()
