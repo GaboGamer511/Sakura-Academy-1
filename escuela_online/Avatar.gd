@@ -97,7 +97,8 @@ func _build_fallback():
 	cm.mid_height = 1.0
 	mi.mesh = cm
 	mi.translation = Vector3(0, 0.9, 0)
-	mi.material_override = Toon.make_material(src, OUTLINE_THICKNESS)
+	# SpatialMaterial se puede asignar directamente; no necesita Toon.make_material.
+	mi.material_override = src
 	body.add_child(mi)
 
 	var nose = MeshInstance.new()
@@ -107,7 +108,7 @@ func _build_fallback():
 	nose.translation = Vector3(0, 1.5, 0.4)
 	var nsrc = SpatialMaterial.new()
 	nsrc.albedo_color = Color(1, 0.9, 0.8)
-	nose.material_override = Toon.make_material(nsrc, 0.0)
+	nose.material_override = nsrc
 	body.add_child(nose)
 
 	if has_sword:
@@ -122,7 +123,7 @@ func _build_fallback():
 		sword.translation = Vector3(0, 0, 0.55)
 		var ssrc = SpatialMaterial.new()
 		ssrc.albedo_color = Color(0.8, 0.65, 0.4)
-		sword.material_override = Toon.make_material(ssrc, 0.0)
+		sword.material_override = ssrc
 		sword_pivot.add_child(sword)
 
 
