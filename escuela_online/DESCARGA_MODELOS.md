@@ -17,6 +17,12 @@ Estas son fuentes y páginas para buscar recursos. No significa que todos los mo
 - [Shuriken Studio — edificios GLB](https://shuriken.studio/models/buildings): busca edificios y piezas de campus; inspecciona el estilo de cada descarga y evita cualquier recurso low-poly.
 - [Shuriken Studio — muebles GLB](https://shuriken.studio/models/furniture): busca aulas, biblioteca, cafetería y oficinas. Revisa cada pieza individualmente.
 
+### Pueblo japonés — selección principal
+- **[Japan — 93 modelos de barrios japoneses (3D Asset)](https://3d-asset.com/packs/japan/)** — recomendado como candidato principal. Precio indicado: 39 USD. Incluye casas y tiendas japonesas, templo, detalles urbanos, vehículos, vegetación, 2K PBR y la escena Sakura-chō de 140 × 120 m. Licencia royalty-free para proyectos personales y comerciales; no permite redistribuir los archivos fuente por separado.
+- **[Muestras gratuitas del catálogo](https://3d-asset.com/samples/)** — 28 modelos, requieren cuenta. Los GLB de muestra usan Draco; no copiarlos directamente a Godot 3.6.3.
+- **Instalación para Godot:** dentro del ZIP del paquete completo, usar los archivos de la carpeta `dcc/` (sin Draco y con texturas PNG/JPEG). Evitar la carpeta web `glb/` si los modelos usan Draco. Comprobar si la escena Sakura-chō también está en `dcc/`; si no, utilizar los modelos individuales para preparar la escena del distrito.
+- **Alternativa:** [Japanese Town — 103 modelos (itch.io)](https://andante-liberal.itch.io/japanese-town-3d), 9.99 USD, GLB de 46 MB y escena de pueblo incluida. Tiene colores mayormente planos, así que es una alternativa estilizada, no la primera elección para el acabado más realista.
+ 
 ### Japón tradicional, naturaleza y cerezos
 - [Shuriken Studio — Japanese Town (ficha)](https://shuriken.studio/kits/japanese-town): **DESCARTADO para Sakura Academy** porque el propio autor lo clasifica como low-poly. No descargarlo para integrar. Seguiremos buscando arquitectura tradicional con más detalle y proporciones menos caricaturescas.
 - [Shuriken Studio — naturaleza GLB](https://shuriken.studio/models/nature): buscar árboles, arbustos y flores. Para cerezos exige copas frondosas, flores densas y ramas naturales. El cerezo pelón de Innerscene que ya se rechazó no debe volver a descargarse.
