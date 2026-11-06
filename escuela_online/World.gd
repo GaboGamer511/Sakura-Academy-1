@@ -68,6 +68,8 @@ func _spawn_player(id):
 	p.player_name = Network.players[id]
 	p.player_id = id
 	p.model_path = Network.models.get(id, "")
+	if p.model_path == "" or not ResourceLoader.exists(p.model_path):
+		p.model_path = Models.best_character()
 	p.translation = _spawn_position(id)
 	add_child(p)
 	spawned[id] = p
@@ -78,7 +80,7 @@ func _spawn_position(id):
 	var index = max(0, int(id) - 1)
 	var column = index % 4
 	var row = int(index / 4)
-	return Vector3(-3.0 + column * 2.0, 1.5, 7.0 + row * 2.5)
+	return Vector3(-3.0 + column * 2.0, 1.5, 30.0 + row * 2.5)
 
 
 func _on_peer_left(id):
@@ -175,6 +177,8 @@ func _spawn_enemies():
 		e.xp_reward = 8
 		e.money_reward = 5
 		e.home = spots[i]
+		if chars.size() > 0:
+			e.model_path = chars[i % chars.size()]
 		add_child(e)
 
 	var r = EnemyScript.new()
