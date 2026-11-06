@@ -28,7 +28,7 @@ func _ready():
 	randomize()
 	_build_environment()
 	_build_light()
-	Level.build_all(self)
+	var loaded_environment_count = Level.build_all(self)
 	add_child(HUDScript.new())          # primero el HUD: los demás le avisan por grupo
 	_spawn_npcs()
 	_spawn_enemies()
@@ -46,7 +46,10 @@ func _ready():
 	timer.connect("timeout", Stats, "save_game")
 	add_child(timer)
 
-	get_tree().call_group("hud", "toast", "Preparatoria Sakura. Habla con la profesora Sato [E]")
+	if loaded_environment_count == 0:
+		get_tree().call_group("hud", "toast", "Faltan los modelos 3D del mundo. Coloca los escenarios aprobados en models/.")
+	else:
+		get_tree().call_group("hud", "toast", "Preparatoria Sakura. Habla con la profesora Sato [E]")
 
 
 # ---------------------------------------------------------------
