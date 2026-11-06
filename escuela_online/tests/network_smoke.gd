@@ -70,18 +70,25 @@ func _watch_roster():
 		yield(create_timer(0.25), "timeout")
 		elapsed += 0.25
 
-		if network_node != null and network_node.players.size() >= 3:
-			if not reached_full_roster:
-				reached_full_roster = true
-				print("NETWORK_SMOKE_FULL_ROSTER role=%s peers=%d" % [role, network_node.players.size()])
+		var peer_count = 0 if network_node == null else network_node.players.size()
+		if peer_count >= 3 and not reached_full_roster:
+			reached_full_roster = true
+			print("NETWORK_SMOKE_FULL_ROSTER role=%s peers=%d" % [role, peer_count])
 
+		if role == "server" and reached_full_roster:
+			# El host da margen a los clientes para terminar y desconectarse.
 			full_roster_elapsed += 0.25
-			var required_time = 6.0 if role == "server" else 2.0
-			if full_roster_elapsed >= required_time:
-				print("NETWORK_SMOKE_OK role=%s peers=%d" % [role, network_node.players.size()])
-				network_node.leave_game()
-				quit(0)
-				return
+		elif role == "client" and peer_count >= 3:
+			full_roster_elapsed += 0.25
+		else:
+			full_roster_elapsed = 0.0
+
+		var required_time = 6.0 if role == "server" else 2.0
+		if reached_full_roster and full_roster_elapsed >= required_time:
+			print("NETWORK_SMOKE_OK role=%s peers=%d" % [role, peer_count])
+			network_node.leave_game()
+			quit(0)
+			return
 
 	_fail("Timeout: role=%s roster=%d connected_full=%s" % [
 		role,
