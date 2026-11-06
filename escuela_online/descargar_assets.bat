@@ -1,5 +1,5 @@
 @echo off
-setlocal EnableExtensions
+setlocal EnableExtensions EnableDelayedExpansion
 chcp 65001 >nul
 title Sakura Academy - Instalador de modelos 3D
 
@@ -32,7 +32,7 @@ for %%Z in ("_descargas\*.zip") do (
     )
 )
 
-if "%FOUND%"=="0" (
+if "!FOUND!"=="0" (
     echo No se encontraron ZIP en _descargas.
     echo.
     echo Descarga paquetes 3D con licencia compatible y coloca
