@@ -51,7 +51,6 @@ static func _contains_any(text, words):
 # Lista de modelos que parecen personajes (cuerpos completos primero).
 static func characters():
 	var first = []
-	var rest = []
 	for p in list_models():
 		var filename = p.get_file()
 		if _contains_any(filename, NOT_CHARACTER):
