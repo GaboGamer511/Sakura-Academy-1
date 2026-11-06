@@ -38,6 +38,18 @@ Consulta:
 
 La iluminación, los materiales y el postprocesado pueden mejorar el acabado, pero no corrigen proporciones chibi ni geometría low-poly. La selección final debe tener siluetas y proporciones adecuadas antes de aplicar iluminación.
 
+## Pueblo japonés — selección principal
+
+**Recomendación principal: [Japan — 93 modelos de barrios japoneses (3D Asset)](https://3d-asset.com/packs/japan/).** Es un paquete de pago (la página muestra 39 USD) con 93 modelos, texturas PBR 2K y licencia royalty-free para proyectos personales y comerciales. Incluye casas, tiendas, edificios tradicionales, templo, vegetación, vehículos y una escena de barrio ya montada llamada Sakura-chō (140 × 120 m). La ficha declara escala real, materiales PBR y modelos individuales medidos. Es el candidato principal para el distrito japonés, no un recurso ya integrado ni probado en nuestro Godot 3.6.3.
+
+- [Ver el paquete y comprar/descargar Japan](https://3d-asset.com/packs/japan/)
+- [Ver 28 muestras gratuitas](https://3d-asset.com/samples/) (requieren cuenta; las muestras web usan Draco, así que no las uses directamente en Godot 3.6.3).
+- Al descargar el paquete completo, utiliza la carpeta **`dcc/`**, que contiene modelos sin Draco y texturas PNG/JPEG para herramientas de escritorio, incluida Godot. No uses los GLB de la carpeta web `glb/` si contienen Draco.
+- Si la escena ensamblada Sakura-chō está disponible en `dcc/`, úsala como punto de partida y copia el GLB a `_descargas/`; si solo está en `glb/`, no la uses hasta verificar que no tenga compresión Draco. Para piezas individuales, conserva los modelos y prepara una escena de distrito con ellos.
+- La licencia permite incluir los recursos en el juego terminado, pero prohíbe redistribuir los archivos fuente por separado. Por eso los modelos no se subirán al repositorio público: cada usuario debe descargarlos desde el vendedor y colocarlos localmente en `_descargas/`.
+
+**Alternativa estilizada, no prioritaria:** [Japanese Town — 103 modelos (itch.io)](https://andante-liberal.itch.io/japanese-town-3d), 9.99 USD, incluye GLB de 46 MB, casas, interiores y escena de pueblo. Su autor lo describe como de colores mayormente planos; por eso queda como alternativa si el paquete principal no encaja visualmente, no como selección definitiva.
+
 ## Recursos 3D
 Los modelos se detectan recursivamente dentro de `models/` en formatos glTF/GLB. Coloca los ZIP en `_descargas/` y ejecuta `descargar_assets.bat`; el escáner reconoce modelos por palabras clave en los nombres de archivo. Antes de aceptar un recurso hay que revisar calidad visual, licencia, formato, materiales, texturas y compatibilidad con Godot 3.6.3. Un modelo pequeño no es automáticamente adecuado.
 
