@@ -94,9 +94,11 @@ remotesync func chat_msg(who, text):
 remote func receive_roster(roster_players, roster_models, started):
 	if get_tree().is_network_server():
 		return
-	players = roster_players.duplicate()
-	models = roster_models.duplicate()
-	game_started = started
+	if typeof(roster_players) != TYPE_DICTIONARY or typeof(roster_models) != TYPE_DICTIONARY:
+		return
+	players = roster_players.duplicate(true)
+	models = roster_models.duplicate(true)
+	game_started = bool(started)
 	emit_signal("player_list_changed")
 
 
@@ -107,13 +109,21 @@ remote func register_player(player_name, model_path):
 	var id = get_tree().get_rpc_sender_id()
 	if id <= 1 or id > 2147483647:
 		return
+	if players.has(id):
+		return
+	if players.size() >= MAX_PLAYERS:
+		var peer = get_tree().network_peer
+		if peer is NetworkedMultiplayerENet:
+			peer.disconnect_peer(id, true)
+		return
 	var safe_name = str(player_name).strip_edges().substr(0, 24)
 	if safe_name == "":
 		safe_name = "Jugador"
-	players[id] = safe_name
-	models[id] = str(model_path)
-	# Actualiza a todos, incluido el nuevo cliente.
-	rpc("register_player_update", id, safe_name, str(model_path))
+	var safe_model = str(model_path)
+	if not safe_model.begins_with("res://models/"):
+		safe_model = ""
+	# Solo se acepta una ruta local de modelos. Nunca se carga una ruta arbitraria.
+	rpc("register_player_update", id, safe_name, safe_model)
 
 
 remotesync func register_player_update(id, player_name, model_path):
@@ -132,10 +142,9 @@ remotesync func remove_player_update(id):
 func _on_peer_connected(id):
 	if not get_tree().is_network_server():
 		return
-	# Primero envía el estado actual al nuevo peer.
-	rpc_id(id, "receive_roster", players, models, game_started)
-	# El nuevo peer recibirá su propio registro desde _on_connected_ok.
-	# load_world se envía después del roster para los ingresos durante una partida.
+	# El roster inicial se envía antes de cualquier cambio de escena.
+	rpc_id(id, "receive_roster", players.duplicate(true), models.duplicate(true), game_started)
+	# ENet conserva el orden de los RPC fiables: el roster llega antes que load_world.
 	if game_started:
 		rpc_id(id, "load_world")
 
@@ -143,8 +152,8 @@ func _on_peer_connected(id):
 func _on_peer_disconnected(id):
 	if not get_tree().is_network_server():
 		return
-	players.erase(id)
-	models.erase(id)
+	if not players.has(id):
+		return
 	rpc("remove_player_update", id)
 
 
