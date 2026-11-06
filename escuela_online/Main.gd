@@ -45,7 +45,7 @@ func _ready():
 	char_option = OptionButton.new()
 	char_paths = Models.characters()
 	if char_paths.size() == 0:
-		char_option.add_item("Cápsula (sin modelos en la carpeta models)")
+		char_option.add_item("Personaje automático (instala un GLB riggeado)")
 	else:
 		for p in char_paths:
 			char_option.add_item(p.get_file().get_basename())
@@ -95,7 +95,7 @@ func _ready():
 
 func _chosen_model():
 	if char_paths.size() == 0:
-		return ""
+		return Models.best_character()
 	return char_paths[char_option.selected]
 
 
