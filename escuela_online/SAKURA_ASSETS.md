@@ -1,7 +1,7 @@
 # Sakura Academy — inventario y criterios de calidad 3D
 
 ## Dirección artística y escala
-Sakura Academy busca un acabado anime 3D moderno y detallado. **No se utilizará low poly como estilo artístico.** La optimización debe conservar la calidad visual, no reemplazarla por modelos simples.
+Sakura Academy busca un acabado anime 3D moderno y detallado. **El estilo definitivo no será low-poly**, pero se permite utilizar temporalmente y de forma selectiva algunos modelos low-poly gratuitos, sobre todo en el distrito urbano y elementos secundarios, para cuidar el rendimiento y avanzar sin presupuesto. La academia y los personajes principales conservan la prioridad de detalle.
 
 El mapa será de tamaño mediano y estará densamente ambientado. La academia será claramente la zona más grande e imponente. Las demás áreas serán destinos compactos con identidad propia: distrito urbano, zona de santuarios/templos, costa y naturaleza. Evitar kilómetros de terreno vacío.
 
@@ -14,7 +14,8 @@ Todos los recursos y la organización del mundo deben considerar el modo online 
 
 ## Criterios obligatorios para aceptar modelos
 - Calidad de silueta y proporciones a la distancia normal de juego.
-- Materiales y texturas coherentes con el estilo anime 3D moderno.
+- Materiales y texturas coherentes con el estilo anime 3D moderno; en assets low-poly temporales, comprobar que el acabado no resulte demasiado caricaturesco.
+- Los ajustes de iluminación, materiales, niebla y exposición pueden mejorar la integración visual, pero no añaden geometría ni corrigen proporciones.
 - Geometría suficiente para evitar formas toscas o angulosas visibles.
 - Licencia clara y compatible con el uso previsto.
 - Formato y compatibilidad comprobables con Godot 3.6.3.
@@ -24,7 +25,7 @@ Todos los recursos y la organización del mundo deben considerar el modo online 
 ## Cerezos y vegetación
 El modelo Flowering Cherry Tree de Innerscene queda **descartado**: su copa se ve demasiado escasa/pelona para la identidad visual buscada. No se debe recomendar ni incorporar como árbol principal.
 
-Buscar cerezos con copas abundantes, volumen de flores, ramas naturales y una silueta atractiva. Conviene evaluar varios modelos y variantes antes de seleccionar uno. Combinar árboles principales de alta calidad con vegetación secundaria coherente, sin recurrir a modelos low poly.
+Buscar cerezos con copas abundantes, volumen de flores, ramas naturales y una silueta atractiva. Conviene evaluar varios modelos y variantes antes de seleccionar uno. Combinar árboles principales de alta calidad con vegetación secundaria coherente. Se permiten piezas low-poly temporales para vegetación distante si su silueta funciona y no se convierten en protagonistas.
 
 ## Recursos por región
 1. **Academia (prioridad máxima):** edificios, aulas, gimnasio, biblioteca, residencias, cafetería, patios, jardines y mobiliario.
