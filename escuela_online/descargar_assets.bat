@@ -41,7 +41,7 @@ if "!FOUND!"=="0" (
 
 echo.
 echo Modelos GLB/GLTF encontrados tras la extraccion:
-dir /s /b models\*.glb models\*.gltf 2>nul
+for /r "models" %%F in (*.glb *.gltf) do echo %%F
 echo.
 echo IMPORTANTE:
 echo - No descargues ni instales modelos low poly como estilo artistico.
