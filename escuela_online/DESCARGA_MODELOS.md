@@ -69,7 +69,9 @@ Para los personajes, usa cuerpos completos; piezas sueltas como pelo, ojos, arma
 
 ## 4. Reglas de calidad y licencia
 
-- El estilo definitivo no será low-poly; se permite temporalmente en elementos secundarios gratuitos y seleccionados.
+- El estilo definitivo no será low-poly; se permite temporalmente en elementos secundarios gratuitos y seleccionados, sobre todo en el distrito urbano.
+- `Toon.gd` armoniza los materiales `SpatialMaterial` duplicándolos y moderando reflejos; conserva texturas PBR y mapas importados. No suaviza la geometría ni convierte un modelo low-poly en uno detallado.
+- No aplicar contornos negros globales. Los `ShaderMaterial` propios de los assets se conservan sin modificaciones.
 - No usar geometría procedural como sustituto de edificios, árboles, muebles o personajes.
 - La iluminación, los materiales y el postprocesado pueden armonizar assets sencillos, pero no convertir geometría low-poly en geometría detallada.
 - No asumir que un modelo gratuito permite cualquier uso: guarda su licencia y atribuciones.
