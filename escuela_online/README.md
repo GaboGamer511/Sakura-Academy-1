@@ -46,6 +46,10 @@ Estos modelos gratuitos sirven como piezas iniciales, no forman todavía un pueb
 - [University Building — GLB gratuito, CC0](https://grab3d.com/models/buildings/university-building/): edificio universitario de tres plantas. Candidato para comparar silueta y proporciones; no está aprobado como campus final.
 - [School de Shuriken Studio — kit gratuito, GLB](https://shuriken.studio/kits/school): contiene 27 piezas escolares; excluir expresamente `Low-Poly Classroom Set`. El conjunto es estilizado y debe inspeccionarse antes de usarlo; no es una aprobación automática.
 
+## Acabado visual temporal para assets estilizados
+
+Se permite usar piezas low-poly gratuitas y seleccionadas en el distrito japonés y decoración secundaria. `Toon.gd` ahora duplica materiales `SpatialMaterial` y conserva sus texturas PBR, mapas normales, transparencia y emisión; limita reflejos excesivos para evitar un aspecto plástico. No aplica contornos ni altera la geometría. Los materiales personalizados `ShaderMaterial` se dejan intactos. La iluminación ambiental, el ciclo día/noche y la niebla ayudan a integrar las piezas. Esto es un tratamiento provisional, no una conversión a modelos detallados. El rendimiento debe medirse en el equipo objetivo.
+
 ## Recursos 3D
 Los modelos se detectan recursivamente dentro de `models/` en formatos glTF/GLB. Coloca los ZIP en `_descargas/` y ejecuta `descargar_assets.bat`; el escáner reconoce modelos por palabras clave en los nombres de archivo. Antes de aceptar un recurso hay que revisar calidad visual, licencia, formato, materiales, texturas y compatibilidad con Godot 3.6.3. Un modelo pequeño no es automáticamente adecuado.
 
