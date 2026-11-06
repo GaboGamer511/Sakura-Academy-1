@@ -6,6 +6,11 @@ static func apply(node, _outline_thickness = 0.0):
 	_polish_recursive(node)
 
 
+# Compatibilidad con Avatar.gd: prepara materiales SpatialMaterial del avatar provisional.
+static func make_material(source, _outline_thickness = 0.0):
+	return _make_polished_material(source)
+
+
 static func _polish_recursive(node):
 	if node is MeshInstance and node.mesh:
 		for i in range(node.mesh.get_surface_count()):
