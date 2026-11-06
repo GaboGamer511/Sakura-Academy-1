@@ -38,6 +38,10 @@ Buscar cerezos con copas abundantes, volumen de flores, ramas naturales y una si
 ## Estado del recurso de cerezo anterior
 El candidato Flowering Cherry Tree de Innerscene fue revisado por el usuario y rechazado por su apariencia pelona. No está aprobado y no debe tratarse como recurso seleccionado ni integrado.
 
+## Tratamiento provisional de modelos low-poly
+
+Se permiten gratuitamente y de forma selectiva en el distrito urbano y decoración secundaria. El pulido del motor debe conservar los mapas PBR importados: duplicar `SpatialMaterial`, mantener albedo, normal, roughness/metallic maps, transparencia y emisión, y moderar reflejos demasiado fuertes. No aplicar contornos negros globales ni sobrescribir materiales personalizados. Iluminación ambiental, sombras selectivas, niebla y corrección de color sirven para unificar el conjunto, pero no cambian la silueta ni añaden detalle geométrico. Los assets deben poder reemplazarse sin tocar lógica ni red.
+
 ## Optimización sin degradar calidad
 - Modelos detallados cerca del jugador y LOD para distancia.
 - Materiales compartidos y atlas para reducir cambios de material.
