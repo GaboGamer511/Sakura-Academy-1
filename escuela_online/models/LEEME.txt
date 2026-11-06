@@ -1,32 +1,27 @@
 CARPETA DE MODELOS
 ==================
-Pon aquí tus modelos exportados como glTF binario (.glb):
+Coloca aquí modelos 3D reales exportados como glTF binario (.glb) o glTF (.gltf).
 
-  player.glb   -> tu personaje (lo usan todos los jugadores)
-  school.glb   -> tu escuela / escenario (reemplaza la escuela de cajas)
+Ejemplos de nombres esperados por los sistemas actuales:
+  player.glb   -> modelo del personaje, si el sistema de avatar lo utiliza
+  school.glb   -> modelo de campus/escenario, si el cargador lo utiliza
 
-Cómo exportar desde Blender: File > Export > glTF 2.0 (.glb)
-  - Marca "Apply Modifiers".
-  - Si el personaje tiene animaciones, deja marcado "Animation" y "Skinning".
+Antes de añadir un modelo, comprueba su licencia, escala, materiales, texturas y compatibilidad con Godot 3.6.3. No basta con que el archivo sea pequeño: debe cumplir la dirección artística anime 3D moderna.
 
-Animaciones (el juego las busca por nombre, sin importar mayúsculas):
-  idle    -> parado
-  run     -> correr (o "walk" si no tienes run)
+ANIMACIONES
+===========
+Cuando el personaje tenga esqueleto y animaciones, conserva nombres compatibles con el controlador:
+  idle    -> reposo
+  run     -> correr (o walk si el controlador lo admite)
   roll    -> esquivar (opcional)
   attack  -> golpe (opcional)
-Puedes bajar animaciones gratis de Mixamo y combinarlas en Blender.
 
-Ajustes si algo se ve mal (constantes al inicio de Player.gd y World.gd):
-  MODEL_SCALE       -> tamaño del personaje
-  MODEL_YAW_OFFSET  -> 180 si mira hacia atrás
-  OUTLINE_THICKNESS -> grosor del contorno
-  USE_TOON          -> false para ver los materiales originales
+No reemplaces personajes finales con cápsulas o geometría de prueba. Los modelos deben tener rig y animaciones compatibles con el sistema existente.
 
+MUNDO ABIERTO
+=============
+El proyecto contempla varias regiones conectadas: Sakura Academy, ciudad japonesa, santuarios sintoístas con torii, templos budistas, costa y playas, pueblos, bosques, montañas y lagos.
 
-RECURSOS DEL CAMPUS SAKURA
-==========================
-El pack ambiental recomendado es Low Poly Trees Pack (11 MB, GLB, licencia CC0):
-https://riclmbr.itch.io/low-poly-trees-pack
-Descarga LowPolyTreesPack.zip, colocalo en la carpeta _descargas y ejecuta descargar_assets.bat.
-El paquete contiene 26 modelos de árboles y naturaleza con 3 atlas compartidos. No es un modelo de personaje.
-Consulta SAKURA_ASSETS.md antes de incorporar otros paquetes para evitar importaciones innecesarias.
+Los modelos ambientales deben ser assets 3D reales, no edificios, árboles ni mobiliario generados mediante scripts. Para los cerezos, elegir copas abundantes y flores densas; el modelo de cerezo anteriormente propuesto fue rechazado por verse demasiado pelón.
+
+Consulta AMBIENTE_VISUAL.md y SAKURA_ASSETS.md para conocer la dirección artística y los criterios de aceptación.
