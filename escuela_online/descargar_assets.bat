@@ -40,6 +40,9 @@ if "!FOUND!"=="0" (
 )
 
 echo.
+echo Modelos GLB/GLTF encontrados tras la extraccion:
+dir /s /b models\*.glb models\*.gltf 2>nul
+echo.
 echo IMPORTANTE:
 echo - No descargues ni instales modelos low poly como estilo artistico.
 echo - Revisa la calidad, licencia, formato y tamano de cada paquete.
@@ -47,6 +50,7 @@ echo - El cerezo de Innerscene anterior fue descartado.
 echo - No se han incluido modelos automaticamente en el repositorio.
 echo.
 echo Abre project.godot con Godot 3.6.3 para importar los recursos.
+echo Revisa DESCARGA_MODELOS.md para fuentes, nombres y reconocimiento automatico.
 echo Revisa AMBIENTE_VISUAL.md y SAKURA_ASSETS.md.
 echo.
 pause
