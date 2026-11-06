@@ -21,3 +21,12 @@ Ajustes si algo se ve mal (constantes al inicio de Player.gd y World.gd):
   MODEL_YAW_OFFSET  -> 180 si mira hacia atrás
   OUTLINE_THICKNESS -> grosor del contorno
   USE_TOON          -> false para ver los materiales originales
+
+
+RECURSOS DEL CAMPUS SAKURA
+==========================
+El pack ambiental recomendado es Low Poly Trees Pack (11 MB, GLB, licencia CC0):
+https://riclmbr.itch.io/low-poly-trees-pack
+Descarga LowPolyTreesPack.zip, colocalo en la carpeta _descargas y ejecuta descargar_assets.bat.
+El paquete contiene 26 modelos de árboles y naturaleza con 3 atlas compartidos. No es un modelo de personaje.
+Consulta SAKURA_ASSETS.md antes de incorporar otros paquetes para evitar importaciones innecesarias.
