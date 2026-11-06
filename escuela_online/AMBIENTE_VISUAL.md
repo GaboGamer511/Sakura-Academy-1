@@ -1,46 +1,29 @@
-# Sakura Academy — dirección artística del campus
+# Dirección visual de Sakura Academy
 
-## Idea central
-Sakura Academy debe sentirse como un campus japonés de primavera: bonito, luminoso, acogedor, colorido y lleno de actividad cotidiana. Los cerezos en flor son un símbolo central de la identidad del juego, no un adorno aislado.
+## Identidad
+Un campus japonés contemporáneo durante la primavera, con una atmósfera encantadora, acogedora y viva. La flor de sakura define la silueta y la paleta: copas rosadas, pétalos suaves, senderos limpios, jardines cuidados y arquitectura escolar atractiva.
 
-## Paisaje y vegetación
-- Árboles de sakura de modelos 3D reales, con copas rosadas abundantes y troncos/ramas bien definidos.
-- Distribuir cerezos en avenidas peatonales, patios, jardines, entradas y zonas de descanso. Crear pequeños túneles de cerezos en los caminos principales.
-- Añadir modelos reales de arbustos, césped, flores de temporada, macetas, setos y árboles complementarios para que el campus no sea monocromático.
-- Pétalos en el suelo mediante texturas/decals o meshes artísticos ya preparados. Si se incorporan partículas de pétalos, deben ser un efecto ligero y opcional, no una sustitución de los modelos de árboles.
-- Bancos, faroles, puentes pequeños, fuentes y pérgolas como recursos 3D reales, donde encajen con el diseño del campus.
+## Calidad visual
+- Anime 3D moderno, no low poly.
+- Personajes con siluetas diferenciadas, rostros expresivos, ojos trabajados, cabello en mechones y ropa con pliegues/materiales.
+- Edificios con geometría arquitectónica real, ventanas, marcos, aleros, barandillas, interiores y mobiliario.
+- Árboles de cerezo con troncos y ramas naturales, copas densas y flores volumétricas/texturizadas.
+- Vegetación secundaria, jardineras, bancos, faroles japoneses, fuentes y detalles de campus.
+- Materiales cuidados, iluminación suave, sombras selectivas y colores primaverales.
+- HUD moderno, colorido, legible y coherente con la identidad Sakura.
 
-## Arquitectura
-- Escuela japonesa moderna y acogedora: edificios de varios pisos, grandes ventanales, fachadas claras, detalles de madera y señalización escolar.
-- Patios amplios y legibles, pasillos cubiertos, escaleras, balcones y entradas reconocibles.
-- Zonas con identidad: entrada principal, patio central de sakura, aulas, biblioteca, cafetería, gimnasio, dojo, clubes y jardines.
-- Evitar una distribución caótica o una repetición evidente del mismo edificio. Mantener una arquitectura coherente entre zonas.
+## Rendimiento: conservar calidad, administrar coste
+- Reutilizar recursos y materiales; evitar materiales únicos innecesarios.
+- LOD para objetos lejanos, manteniendo el modelo de alta calidad cerca del jugador.
+- Visibilidad por sectores y culling para evitar renderizar zonas ocultas.
+- Texturas con resolución acorde a su tamaño en pantalla; compresión adecuada.
+- Sombras dinámicas selectivas y lightmaps cuando sean viables.
+- Pétalos y partículas con límites configurables.
+- Medir FPS y memoria en el Intel HD 3000; ajustar opciones gráficas, no rebajar por defecto todos los assets.
 
-## Color, luz y atmósfera
-- Paleta principal: rosa sakura, blanco cálido, verde primaveral, madera clara y azul cielo.
-- Iluminación diurna suave y agradable, sombras moderadas y materiales con colores vivos pero no saturados.
-- Cielo claro y sensación de aire libre. Los cambios de hora pueden aportar amaneceres y atardeceres cálidos sin perder legibilidad.
-- El campus debe seguir siendo atractivo con los ajustes gráficos bajos del equipo objetivo.
-
-## Vida y animación ambiental
-- Estudiantes con modelos y animaciones reales recorriendo rutas, conversando, sentándose y reuniéndose en grupos.
-- Banderines, carteles escolares y elementos decorativos que ayuden a dar movimiento visual.
-- Animación de árboles y flores solo si se puede lograr de forma ligera y sin scripts que construyan geometría.
-- Pétalos animados opcionales con límites estrictos de cantidad y distancia; opción para desactivarlos en equipos modestos.
-- Sonido ambiental suave: pájaros, viento y actividad escolar, con controles de volumen.
-
-## Reglas técnicas y de producción
-1. Todo árbol, edificio, banco, farol, planta, fuente, mobiliario y decoración debe proceder de un asset 3D real o de un recurso artístico importado. No construir el campus mediante cubos, primitivas ni geometría generada por scripts.
-2. No generar el escenario de forma procedural. Los scripts pueden colocar, cargar, activar/desactivar y optimizar assets existentes, pero no fabricarlos.
-3. Preferir modelos low-poly estilizados de buena calidad o modelos anime optimizados, con materiales y texturas eficientes para Intel HD 3000 y 4 GB de RAM.
-4. Usar LOD si está disponible, instancing de recursos repetidos, occlusion culling cuando sea compatible y límites de distancia para vegetación/efectos.
-5. No llenar el campus con miles de pétalos ni efectos costosos. Mantener una opción de calidad baja.
-6. Conservar el controlador, la cámara y los controles actuales del proyecto `escuela_online`. La mejora del ambiente debe centrarse en escenas y recursos, no en reescribir el movimiento.
-7. No declarar terminado ni probado ningún elemento hasta que el modelo exista en el proyecto, Godot 3.6.3 lo importe y la escena se compruebe en ejecución.
-
-## Prioridad de implementación
-1. Modelos reales de árboles de sakura y vegetación complementaria.
-2. Entrada principal y patio central como espacios visualmente memorables.
-3. Edificios escolares y mobiliario coherentes.
-4. Jardines, caminos, bancos, faroles y decoración.
-5. Vida ambiental: estudiantes con animaciones, sonido y pétalos opcionales.
+## Restricciones del proyecto
+- Godot 3.6.3 como versión objetivo.
+- Conservar cámara, movimiento y controles existentes.
+- No crear edificios, árboles, personajes ni mobiliario mediante geometría procedural de scripts.
+- Los scripts pueden gestionar lógica, carga de modelos, visibilidad, interacción, animación y efectos.
+- No dar por integrado ni probado ningún asset hasta que exista dentro del proyecto y se haya abierto en Godot.
