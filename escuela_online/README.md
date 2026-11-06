@@ -27,9 +27,12 @@ E hablar con NPCs · Enter chat · Rueda del mouse zoom · Esc suelta el mouse
 - **Chat**, nombres y barras de vida sobre los personajes.
 - **Estilo anime**: cel-shading con contorno (`Toon.gd`, `shaders/`).
 
+## Dirección visual Sakura
+El campus se orienta a una primavera japonesa luminosa: cerezos en flor, jardines, caminos, madera clara, edificios escolares acogedores y pétalos opcionales de bajo coste. Consulta `AMBIENTE_VISUAL.md` y `SAKURA_ASSETS.md` para la guía artística y el inventario de recursos.
+
 ## Modelos
 Se detectan solos dentro de `models/` (cualquier subcarpeta): `.glb` / `.gltf`.
-- El selector del lobby lista los personajes encontrados.
+- El selector del lobby lista los personajes encontrados; los modelos de árboles, flores y vegetación se excluyen del selector.
 - Escuela propia: un modelo con "school" o "classroom" en el nombre reemplaza la escuela de cajas.
 - Pupitres: un modelo con "desk" en el nombre (`.glb/.gltf/.obj/.dae`) reemplaza las cajas de pupitres.
 - Si el modelo no trae animaciones, el juego anima solo (rebote al caminar, estocada al atacar).
