@@ -38,6 +38,10 @@ El juego debe conservar su modo online/multijugador como parte central de su dis
 ## Calidad de los assets
 Todo modelo ambiental o personaje debe evaluarse visualmente antes de aceptarlo. Los assets low-poly temporales requieren una revisión adicional de silueta y proporciones, y deben poder sustituirse sin rehacer la lógica del juego. Revisar densidad y forma de la copa en los cerezos, proporciones, materiales, texturas, escala, licencia y compatibilidad con Godot 3.6.3. Un archivo pequeño no es automáticamente un buen recurso. No aceptar un asset solo por su peso o número de polígonos.
 
+## Acabado temporal de assets estilizados
+
+Los modelos low-poly gratuitos pueden utilizarse en el distrito urbano secundario y props de fondo. Godot debe armonizarlos mediante materiales que conserven texturas y mapas PBR, reflejos moderados, iluminación ambiental, sombras selectivas, niebla y corrección de color. Evitar contornos gruesos y efectos de postprocesado costosos. No prometer que el sombreado convierte una malla simple en una detallada: las piezas son provisionales y reemplazables. La academia, protagonistas y elementos emblemáticos conservan la prioridad visual.
+
 ## Rendimiento sin degradar el estilo
 - Reutilizar recursos, materiales y atlas donde sea posible.
 - Usar low-poly solo como compromiso temporal y selectivo; no asumir que una iluminación bonita puede reparar una malla pobre.
