@@ -30,25 +30,21 @@ Consulta:
 - `MAPA_MUNDO.md`: distribución conceptual y prioridades de construcción.
 - `PERSONAJES.md`: dirección de diseño de personajes.
 
-## Descargas seleccionadas (candidatos, no modelos finales aprobados)
+## Recursos gratuitos seleccionados (sin pagos)
 
-- **Paquete de escuela Shuriken Studio (ZIP, GLB, 1.4 MB):** [descarga directa](https://shuriken.studio/kits/school/download). Incluye edificio escolar y conjuntos de interiores. Es una base de prueba estilizada; excluye el conjunto llamado `Low-Poly Classroom` y revisa la apariencia del resto antes de integrarlo.
-- **Escuela japonesa y calle comercial — escena GLB (CC0):** [descarga directa del GLB](https://cdn.3dassets.dev/assets/30098/v1/model.glb). [Ficha del paquete y licencia](https://3dassets.dev/packs/japanese-school-and-city-street). Es un candidato para inspección visual, no una academia definitiva aprobada.
-- **Pueblo japonés Shuriken:** [ficha del paquete](https://shuriken.studio/kits/japanese-town). **Descartado para el juego:** la propia ficha lo identifica expresamente como low-poly.
+**No compres ningún paquete para este proyecto.** Los enlaces de esta sección son recursos gratuitos; algunos son candidatos individuales y no un escenario completo.
 
-La iluminación, los materiales y el postprocesado pueden mejorar el acabado, pero no corrigen proporciones chibi ni geometría low-poly. La selección final debe tener siluetas y proporciones adecuadas antes de aplicar iluminación.
+### Pueblo japonés
+- [Casa japonesa tradicional — GLB gratuito, CC0](https://grab3d.com/models/buildings/japanese-house/): casa de madera con tejado de teja, paneles shoji y veranda. El sitio ofrece GLB de calidad completa y versión ligera; elegir GLB para Godot.
+- [Casa de té — GLB gratuito, CC0](https://grab3d.com/models/buildings/tea-house/): edificio tradicional con veranda, puertas correderas y farol.
+- [Japanese Town de Shuriken Studio](https://shuriken.studio/kits/japanese-town): **NO DESCARGAR**. Aunque es gratuito, la ficha clasifica varios edificios como low-poly y no cumple nuestra dirección artística.
 
-## Pueblo japonés — selección principal
+Estos modelos gratuitos sirven como piezas iniciales, no forman todavía un pueblo completo. El distrito debe seguir siendo compacto y denso; no se deben fingir edificios que aún no tenemos.
 
-**Recomendación principal: [Japan — 93 modelos de barrios japoneses (3D Asset)](https://3d-asset.com/packs/japan/).** Es un paquete de pago (la página muestra 39 USD) con 93 modelos, texturas PBR 2K y licencia royalty-free para proyectos personales y comerciales. Incluye casas, tiendas, edificios tradicionales, templo, vegetación, vehículos y una escena de barrio ya montada llamada Sakura-chō (140 × 120 m). La ficha declara escala real, materiales PBR y modelos individuales medidos. Es el candidato principal para el distrito japonés, no un recurso ya integrado ni probado en nuestro Godot 3.6.3.
-
-- [Ver el paquete y comprar/descargar Japan](https://3d-asset.com/packs/japan/)
-- [Ver 28 muestras gratuitas](https://3d-asset.com/samples/) (requieren cuenta; las muestras web usan Draco, así que no las uses directamente en Godot 3.6.3).
-- Al descargar el paquete completo, utiliza la carpeta **`dcc/`**, que contiene modelos sin Draco y texturas PNG/JPEG para herramientas de escritorio, incluida Godot. No uses los GLB de la carpeta web `glb/` si contienen Draco.
-- Si la escena ensamblada Sakura-chō está disponible en `dcc/`, úsala como punto de partida y copia el GLB a `_descargas/`; si solo está en `glb/`, no la uses hasta verificar que no tenga compresión Draco. Para piezas individuales, conserva los modelos y prepara una escena de distrito con ellos.
-- La licencia permite incluir los recursos en el juego terminado, pero prohíbe redistribuir los archivos fuente por separado. Por eso los modelos no se subirán al repositorio público: cada usuario debe descargarlos desde el vendedor y colocarlos localmente en `_descargas/`.
-
-**Alternativa estilizada, no prioritaria:** [Japanese Town — 103 modelos (itch.io)](https://andante-liberal.itch.io/japanese-town-3d), 9.99 USD, incluye GLB de 46 MB, casas, interiores y escena de pueblo. Su autor lo describe como de colores mayormente planos; por eso queda como alternativa si el paquete principal no encaja visualmente, no como selección definitiva.
+### Academia
+- [School building — GLB gratuito, CC0](https://www.innerscene.com/tools/library/3d-parts/school-building-1f9f21e3): escuela histórica de ladrillo a escala real. Es un candidato de estructura/estudio, no la academia anime definitiva.
+- [University Building — GLB gratuito, CC0](https://grab3d.com/models/buildings/university-building/): edificio universitario de tres plantas. Candidato para comparar silueta y proporciones; no está aprobado como campus final.
+- [School de Shuriken Studio — kit gratuito, GLB](https://shuriken.studio/kits/school): contiene 27 piezas escolares; excluir expresamente `Low-Poly Classroom Set`. El conjunto es estilizado y debe inspeccionarse antes de usarlo; no es una aprobación automática.
 
 ## Recursos 3D
 Los modelos se detectan recursivamente dentro de `models/` en formatos glTF/GLB. Coloca los ZIP en `_descargas/` y ejecuta `descargar_assets.bat`; el escáner reconoce modelos por palabras clave en los nombres de archivo. Antes de aceptar un recurso hay que revisar calidad visual, licencia, formato, materiales, texturas y compatibilidad con Godot 3.6.3. Un modelo pequeño no es automáticamente adecuado.
