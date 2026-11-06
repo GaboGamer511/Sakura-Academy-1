@@ -5,7 +5,7 @@ extends Reference
 # Textos que indican que un archivo NO es un personaje (muebles, edificios, piezas sueltas)
 const NOT_CHARACTER = ["kenney", "furniture", "muebles", "building", "wall", "roof", "door",
 	"floor", "school", "classroom", "desk", "chair", "table", "bookcase", "hair", "beard",
-	"eyebrow", "eyes", "teeth", "tongue", "animation"]
+	"eyebrow", "eyes", "teeth", "tongue", "animation", "tree", "cherry", "blossom", "nature", "bush", "flower", "foliage", "plant", "vegetation", "rock", "grass"]
 
 # Textos que sugieren que SÍ es un cuerpo completo (se ponen primero en la lista)
 const BODY_HINTS = ["fullbody", "body", "character", "student", "male", "female", "player"]
