@@ -35,7 +35,11 @@ for %%Z in ("_descargas\*.zip") do (
 if "!FOUND!"=="0" (
     echo No se encontraron ZIP en _descargas.
     echo.
-    echo Descarga paquetes 3D con licencia compatible y coloca
+    echo Personaje anime riggeado gratuito (CC0):
+echo https://dawn-to-dusk-games.itch.io/3d-anime-female-mage-character
+echo Descarga Tier 1 - Model and Textures, guarda el ZIP en _descargas.
+echo.
+echo Descarga paquetes 3D con licencia compatible y coloca
     echo sus archivos ZIP en esta carpeta antes de ejecutar el BAT.
 )
 
@@ -47,7 +51,9 @@ echo IMPORTANTE:
 echo - No descargues ni instales modelos low poly como estilo artistico.
 echo - Revisa la calidad, licencia, formato y tamano de cada paquete.
 echo - El cerezo de Innerscene anterior fue descartado.
-echo - No se han incluido modelos automaticamente en el repositorio.
+echo - Los nombres Anime, Mage, Rigged, Fullbody y Character se detectan automaticamente.
+echo - El juego prioriza personajes completos y no piezas sueltas.
+echo - El ZIP de la modelo anime debe descargarse manualmente desde itch.io.
 echo.
 echo Abre project.godot con Godot 3.6.3 para importar los recursos.
 echo Revisa DESCARGA_MODELOS.md para fuentes, nombres y reconocimiento automatico.

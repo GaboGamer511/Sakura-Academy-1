@@ -1,15 +1,19 @@
 extends Reference
-# Busca modelos dentro de res://models sin importar cómo se llamen ni en qué subcarpeta
-# hayan quedado. Así no hay que renombrar nada a mano.
+# Detector recursivo de modelos de personaje y escenarios instalados en res://models.
+# Acepta GLB/GLTF dentro de cualquier subcarpeta creada al extraer los ZIP.
 
-# Textos que indican que un archivo NO es un personaje (muebles, edificios, piezas sueltas)
-const NOT_CHARACTER = ["kenney", "furniture", "muebles", "building", "wall", "roof", "door",
-	"floor", "school", "classroom", "desk", "chair", "table", "bookcase", "hair", "beard",
-	"eyebrow", "eyes", "teeth", "tongue", "animation", "tree", "cherry", "blossom", "nature", "bush", "flower", "foliage", "plant", "vegetation", "rock", "grass", "shrine", "torii", "temple", "pagoda", "dojo", "house", "town", "city", "street", "vehicle", "car", "bus", "train", "boat", "ship", "prop", "weapon", "sword", "asset", "set", "environment", "landscape", "architecture", "map"]
+const NOT_CHARACTER = ["furniture", "muebles", "building", "wall", "roof", "door",
+	"floor", "school", "classroom", "desk", "chair", "table", "bookcase",
+	"eyebrow", "eyes", "teeth", "tongue", "animation", "tree", "cherry", "blossom",
+	"nature", "bush", "flower", "foliage", "plant", "vegetation", "rock", "grass",
+	"shrine", "torii", "temple", "pagoda", "dojo", "house", "town", "city",
+	"street", "vehicle", "car", "bus", "train", "boat", "ship", "prop",
+	"weapon", "sword", "asset", "environment", "landscape", "architecture", "map",
+	"hair", "beard", "eyelash", "shoe", "glove", "accessory"]
 
-# Textos que sugieren que SÍ es un cuerpo completo (se ponen primero en la lista)
-const BODY_HINTS = ["fullbody", "body", "character", "student", "male", "female", "player", "avatar", "humanoid", "npc", "person", "girl", "boy", "woman", "man"]
-
+const BODY_HINTS = ["fullbody", "full_body", "character", "student", "player",
+	"avatar", "humanoid", "npc", "anime", "rigged", "mage", "girl", "boy",
+	"female", "male", "woman", "man", "person", "human"]
 
 static func list_models(dir_path = "res://models", exts = ["glb", "gltf"]):
 	var out = []
@@ -30,43 +34,64 @@ static func list_models(dir_path = "res://models", exts = ["glb", "gltf"]):
 			var low = fname.to_lower()
 			for e in exts:
 				if low.ends_with("." + e):
-					var p2 = dir_path.plus_file(fname)
-					if not out.has(p2):
-						out.append(p2)
+					var path = dir_path.plus_file(fname)
+					if not out.has(path):
+						out.append(path)
 					break
 		f = d.get_next()
 	d.list_dir_end()
 	out.sort()
 	return out
 
-
-static func _contains_any(text, words):
-	var low = text.to_lower()
-	for w in words:
-		if low.find(w) != -1:
+static func _contains_any(value, words):
+	var low = value.to_lower()
+	for word in words:
+		if low.find(word) != -1:
 			return true
 	return false
 
+static func _character_score(path):
+	var filename = path.get_file().get_basename().to_lower()
+	if _contains_any(filename, NOT_CHARACTER):
+		return -1
+	var score = 0
+	for word in BODY_HINTS:
+		if filename.find(word) != -1:
+			score += 10
+	var folder_text = path.get_base_dir().to_lower()
+	if _contains_any(folder_text, ["characters", "personajes", "avatars", "anime"]):
+		score += 5
+	if filename.find("fullbody") != -1 or filename.find("full_body") != -1:
+		score += 30
+	if filename.find("rigged") != -1:
+		score += 15
+	return score
 
-# Lista de modelos que parecen personajes (cuerpos completos primero).
 static func characters():
-	var first = []
-	for p in list_models():
-		var filename = p.get_file()
-		if _contains_any(filename, NOT_CHARACTER):
-			continue
-		# Solo aceptar cuerpos completos identificables por nombre. Esto evita
-		# asignar accidentalmente un prop, arma o pieza suelta a un jugador/NPC.
-		if _contains_any(filename, BODY_HINTS):
-			first.append(p)
-	return first
+	var ranked = []
+	for path in list_models():
+		var score = _character_score(path)
+		if score > 0:
+			ranked.append({"path": path, "score": score})
+	for i in range(ranked.size()):
+		for j in range(i + 1, ranked.size()):
+			if int(ranked[j].score) > int(ranked[i].score):
+				var swap = ranked[i]
+				ranked[i] = ranked[j]
+				ranked[j] = swap
+	var result = []
+	for item in ranked:
+		result.append(item.path)
+	return result
 
+static func best_character():
+	var found = characters()
+	return found[0] if found.size() > 0 else ""
 
-# Primer modelo (de las extensiones dadas) cuyo nombre de archivo contiene alguna palabra clave.
 static func find_model(keywords, exts = ["glb", "gltf"]):
 	var all = list_models("res://models", exts)
-	for k in keywords:
-		for p in all:
-			if p.get_file().to_lower().find(k) != -1:
-				return p
+	for keyword in keywords:
+		for path in all:
+			if path.get_file().to_lower().find(keyword) != -1:
+				return path
 	return ""

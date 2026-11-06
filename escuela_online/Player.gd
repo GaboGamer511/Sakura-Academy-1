@@ -166,7 +166,7 @@ func _master_move(delta):
 		velocity.y -= GRAVITY * delta
 		velocity = move_and_slide(velocity, Vector3.UP)
 		if death_timer <= 0.0:
-			rpc("revive", Vector3(rand_range(-3, 3), 1.5, rand_range(5, 9)))
+			rpc("revive", get_parent()._spawn_position(player_id))
 		cam_pivot.rotation = Vector3(cam_pitch, cam_yaw, 0)
 		return
 

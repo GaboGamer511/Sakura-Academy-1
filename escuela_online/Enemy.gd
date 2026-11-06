@@ -46,40 +46,17 @@ func _ready():
 	col.translation = Vector3(0, 0.9, 0)
 	add_child(col)
 
-	if kind == "dummy":
-		_build_dummy()
-	else:
-		avatar = Avatar.new()
-		avatar.has_sword = true
-		avatar.extra_scale = 1.12
-		avatar.tint_strength = 0.6
-		avatar.setup(model_path, Color(0.75, 0.15, 0.2))
-		add_child(avatar)
+	avatar = Avatar.new()
+	avatar.has_sword = kind != "dummy"
+	avatar.extra_scale = 1.12 if kind == "rival" else 1.0
+	avatar.tint_strength = 0.0
+	var avatar_color = Color(0.75, 0.15, 0.2) if kind == "rival" else Color(0.62, 0.45, 0.28)
+	avatar.setup(model_path, avatar_color)
+	add_child(avatar)
 
 
 func get_plate_text():
 	return enemy_name
-
-
-func _build_dummy():
-	dummy_mat = SpatialMaterial.new()
-	dummy_mat.albedo_color = Color(0.62, 0.45, 0.28)
-	var post = MeshInstance.new()
-	var cm = CylinderMesh.new()
-	cm.top_radius = 0.22
-	cm.bottom_radius = 0.26
-	cm.height = 1.7
-	post.mesh = cm
-	post.translation = Vector3(0, 0.85, 0)
-	post.material_override = dummy_mat
-	add_child(post)
-	var arm = MeshInstance.new()
-	var am = CubeMesh.new()
-	am.size = Vector3(1.2, 0.18, 0.18)
-	arm.mesh = am
-	arm.translation = Vector3(0, 1.25, 0)
-	arm.material_override = dummy_mat
-	add_child(arm)
 
 
 func _physics_process(delta):
