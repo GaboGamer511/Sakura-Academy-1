@@ -17,12 +17,17 @@ Estas son fuentes y páginas para buscar recursos. No significa que todos los mo
 - [Shuriken Studio — edificios GLB](https://shuriken.studio/models/buildings): busca edificios y piezas de campus; inspecciona el estilo de cada descarga y evita cualquier recurso low-poly.
 - [Shuriken Studio — muebles GLB](https://shuriken.studio/models/furniture): busca aulas, biblioteca, cafetería y oficinas. Revisa cada pieza individualmente.
 
-### Pueblo japonés — selección principal
-- **[Japan — 93 modelos de barrios japoneses (3D Asset)](https://3d-asset.com/packs/japan/)** — recomendado como candidato principal. Precio indicado: 39 USD. Incluye casas y tiendas japonesas, templo, detalles urbanos, vehículos, vegetación, 2K PBR y la escena Sakura-chō de 140 × 120 m. Licencia royalty-free para proyectos personales y comerciales; no permite redistribuir los archivos fuente por separado.
-- **[Muestras gratuitas del catálogo](https://3d-asset.com/samples/)** — 28 modelos, requieren cuenta. Los GLB de muestra usan Draco; no copiarlos directamente a Godot 3.6.3.
-- **Instalación para Godot:** dentro del ZIP del paquete completo, usar los archivos de la carpeta `dcc/` (sin Draco y con texturas PNG/JPEG). Evitar la carpeta web `glb/` si los modelos usan Draco. Comprobar si la escena Sakura-chō también está en `dcc/`; si no, utilizar los modelos individuales para preparar la escena del distrito.
-- **Alternativa:** [Japanese Town — 103 modelos (itch.io)](https://andante-liberal.itch.io/japanese-town-3d), 9.99 USD, GLB de 46 MB y escena de pueblo incluida. Tiene colores mayormente planos, así que es una alternativa estilizada, no la primera elección para el acabado más realista.
- 
+### Pueblo japonés — solo recursos gratuitos
+- [Casa japonesa tradicional — GLB, CC0, gratis](https://grab3d.com/models/buildings/japanese-house/). Casa de madera con tejado de teja, shoji y veranda. Elige el GLB de calidad completa para inspección; la versión ligera existe si el rendimiento lo exige.
+- [Casa de té — GLB, CC0, gratis](https://grab3d.com/models/buildings/tea-house/). Complemento arquitectónico para jardín o calle secundaria.
+- [Japanese Town de Shuriken Studio](https://shuriken.studio/kits/japanese-town): **DESCARTADO**. Es gratis, pero su propia ficha marca varias piezas como low-poly. No descargarlo para integrar en Sakura Academy.
+- Estos edificios son piezas individuales, no un distrito completo. No se debe presentar el pueblo como terminado hasta disponer de suficientes edificios compatibles y una escena ensamblada.
+
+### Academia — solo recursos gratuitos
+- [School building — GLB CC0](https://www.innerscene.com/tools/library/3d-parts/school-building-1f9f21e3): edificio escolar histórico de ladrillo a escala real (49.5 × 18.4 × 18.4 m). Candidato para estudiar estructura; no es el campus anime final.
+- [University Building — GLB CC0](https://grab3d.com/models/buildings/university-building/): edificio de tres plantas con portal columnado; candidato para inspección y comparación, no aprobado como campus final.
+- [School de Shuriken Studio — kit GLB gratuito](https://shuriken.studio/kits/school): 27 piezas. Excluir `Low-Poly Classroom Set`; inspeccionar cada edificio/interior antes de usarlo. No considerarlo aprobado sin verlo dentro de Godot.
+
 ### Japón tradicional, naturaleza y cerezos
 - [Shuriken Studio — Japanese Town (ficha)](https://shuriken.studio/kits/japanese-town): **DESCARTADO para Sakura Academy** porque el propio autor lo clasifica como low-poly. No descargarlo para integrar. Seguiremos buscando arquitectura tradicional con más detalle y proporciones menos caricaturescas.
 - [Shuriken Studio — naturaleza GLB](https://shuriken.studio/models/nature): buscar árboles, arbustos y flores. Para cerezos exige copas frondosas, flores densas y ramas naturales. El cerezo pelón de Innerscene que ya se rechazó no debe volver a descargarse.
