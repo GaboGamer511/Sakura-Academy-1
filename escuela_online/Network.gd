@@ -1,5 +1,6 @@
 extends Node
-# Autoload "Network": conexión ENet, lista de jugadores, chat y estado de escritura.
+# Autoload "Network": conexión ENet, registro de jugadores, chat y estado de escritura.
+# El servidor mantiene la lista autoritativa y distribuye altas/bajas a todos los peers.
 
 signal player_list_changed
 signal connected_ok
@@ -16,7 +17,7 @@ var models = {}           # id -> ruta del modelo elegido
 var my_name = "Jugador"
 var my_model = ""
 var game_started = false
-var typing = false        # true mientras se escribe en el chat (bloquea movimiento)
+var typing = false
 
 
 func _ready():
@@ -28,7 +29,9 @@ func _ready():
 
 
 func host_game(player_name, model_path = ""):
-	my_name = player_name
+	my_name = player_name.strip_edges()
+	if my_name == "":
+		my_name = "Jugador"
 	my_model = model_path
 	var peer = NetworkedMultiplayerENet.new()
 	var err = peer.create_server(PORT, MAX_PLAYERS)
@@ -39,12 +42,15 @@ func host_game(player_name, model_path = ""):
 	models.clear()
 	players[1] = my_name
 	models[1] = my_model
+	game_started = false
 	emit_signal("player_list_changed")
 	return OK
 
 
 func join_game(player_name, ip, model_path = ""):
-	my_name = player_name
+	my_name = player_name.strip_edges()
+	if my_name == "":
+		my_name = "Jugador"
 	my_model = model_path
 	var peer = NetworkedMultiplayerENet.new()
 	var err = peer.create_client(ip, PORT)
@@ -64,7 +70,6 @@ func leave_game():
 	typing = false
 
 
-# --- Solo el host llama a esto desde el lobby ---
 func start_game():
 	if get_tree().is_network_server():
 		rpc("load_world")
@@ -85,31 +90,70 @@ remotesync func chat_msg(who, text):
 	emit_signal("chat_received", who, text)
 
 
-# --- Señales de red ---
-func _on_peer_connected(id):
-	rpc_id(id, "register_player", my_name, my_model)
-	if get_tree().is_network_server() and game_started:
-		rpc_id(id, "load_world")
+# El servidor comparte el roster completo con el jugador que acaba de entrar.
+remote func receive_roster(roster_players, roster_models, started):
+	if get_tree().is_network_server():
+		return
+	players = roster_players.duplicate()
+	models = roster_models.duplicate()
+	game_started = started
+	emit_signal("player_list_changed")
 
 
+# El cliente se registra ante el servidor al completar la conexión.
 remote func register_player(player_name, model_path):
+	if not get_tree().is_network_server():
+		return
 	var id = get_tree().get_rpc_sender_id()
+	if id <= 1 or id > 2147483647:
+		return
+	var safe_name = str(player_name).strip_edges().substr(0, 24)
+	if safe_name == "":
+		safe_name = "Jugador"
+	players[id] = safe_name
+	models[id] = str(model_path)
+	# Actualiza a todos, incluido el nuevo cliente.
+	rpc("register_player_update", id, safe_name, str(model_path))
+
+
+remotesync func register_player_update(id, player_name, model_path):
 	players[id] = player_name
 	models[id] = model_path
 	emit_signal("player_list_changed")
 
 
-func _on_peer_disconnected(id):
+remotesync func remove_player_update(id):
 	players.erase(id)
 	models.erase(id)
 	emit_signal("peer_left", id)
 	emit_signal("player_list_changed")
 
 
+func _on_peer_connected(id):
+	if not get_tree().is_network_server():
+		return
+	# Primero envía el estado actual al nuevo peer.
+	rpc_id(id, "receive_roster", players, models, game_started)
+	# El nuevo peer recibirá su propio registro desde _on_connected_ok.
+	# load_world se envía después del roster para los ingresos durante una partida.
+	if game_started:
+		rpc_id(id, "load_world")
+
+
+func _on_peer_disconnected(id):
+	if not get_tree().is_network_server():
+		return
+	players.erase(id)
+	models.erase(id)
+	rpc("remove_player_update", id)
+
+
 func _on_connected_ok():
 	var me = get_tree().get_network_unique_id()
 	players[me] = my_name
 	models[me] = my_model
+	# Registro autoritativo; el servidor retransmite la entrada al resto.
+	rpc_id(1, "register_player", my_name, my_model)
 	emit_signal("connected_ok")
 	emit_signal("player_list_changed")
 
