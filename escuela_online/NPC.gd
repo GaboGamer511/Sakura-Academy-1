@@ -29,7 +29,7 @@ func _ready():
 	add_child(col)
 
 	avatar = Avatar.new()
-	avatar.tint_strength = 0.55
+	# Usar el color del NPC sin depender de una propiedad opcional del Avatar.
 	avatar.setup(model_path, color)
 	avatar.rotation.y = yaw
 	add_child(avatar)
