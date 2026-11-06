@@ -8,7 +8,7 @@ Estas son fuentes y páginas para buscar recursos. No significa que todos los mo
 
 ### Personajes anime 3D
 - [Sketchfab — modelos anime descargables](https://sketchfab.com/search?features=downloadable&type=models&q=anime%20character): filtra por descargables y revisa la licencia individual. Hay modelos con atribución obligatoria; conserva el crédito y el archivo de licencia.
-- [Shuriken Studio — personajes y criaturas GLB](https://shuriken.studio/models/characters): catálogo de modelos GLB. Examina cada modelo; no selecciones los que tengan estética low-poly.
+- [Shuriken Studio — personajes y criaturas GLB](https://shuriken.studio/models/characters): catálogo de modelos GLB. Examina cada modelo; se permite low-poly temporal y selectivo para zonas secundarias; evita piezas demasiado toscas o caricaturescas.
 
 ### Academia, edificios y mobiliario
 - [DESCARGA DIRECTA — Shuriken Studio School (ZIP, GLB, 1.4 MB)](https://shuriken.studio/kits/school/download): incluye edificio escolar y conjuntos de aulas, cafetería, gimnasio, laboratorio y biblioteca. Candidato provisional estilizado; excluye el archivo `Low-Poly Classroom` y no lo consideres la academia definitiva sin inspeccionarlo.
@@ -20,7 +20,7 @@ Estas son fuentes y páginas para buscar recursos. No significa que todos los mo
 ### Pueblo japonés — solo recursos gratuitos
 - [Casa japonesa tradicional — GLB, CC0, gratis](https://grab3d.com/models/buildings/japanese-house/). Casa de madera con tejado de teja, shoji y veranda. Elige el GLB de calidad completa para inspección; la versión ligera existe si el rendimiento lo exige.
 - [Casa de té — GLB, CC0, gratis](https://grab3d.com/models/buildings/tea-house/). Complemento arquitectónico para jardín o calle secundaria.
-- [Japanese Town de Shuriken Studio](https://shuriken.studio/kits/japanese-town): **DESCARTADO**. Es gratis, pero su propia ficha marca varias piezas como low-poly. No descargarlo para integrar en Sakura Academy.
+- [Japanese Town de Shuriken Studio](https://shuriken.studio/kits/japanese-town): **PERMITIDO DE FORMA PROVISIONAL** para el distrito secundario. Selecciona solo piezas que se vean bien a escala de juego; no lo uses para la academia principal ni para personajes protagonistas.
 - Estos edificios son piezas individuales, no un distrito completo. No se debe presentar el pueblo como terminado hasta disponer de suficientes edificios compatibles y una escena ensamblada.
 
 ### Academia — solo recursos gratuitos
@@ -29,7 +29,7 @@ Estas son fuentes y páginas para buscar recursos. No significa que todos los mo
 - [School de Shuriken Studio — kit GLB gratuito](https://shuriken.studio/kits/school): 27 piezas. Excluir `Low-Poly Classroom Set`; inspeccionar cada edificio/interior antes de usarlo. No considerarlo aprobado sin verlo dentro de Godot.
 
 ### Japón tradicional, naturaleza y cerezos
-- [Shuriken Studio — Japanese Town (ficha)](https://shuriken.studio/kits/japanese-town): **DESCARTADO para Sakura Academy** porque el propio autor lo clasifica como low-poly. No descargarlo para integrar. Seguiremos buscando arquitectura tradicional con más detalle y proporciones menos caricaturescas.
+- [Shuriken Studio — Japanese Town (ficha)](https://shuriken.studio/kits/japanese-town): **USO PROVISIONAL Y LIMITADO**: se puede probar en el distrito urbano secundario. El acabado se puede armonizar con materiales, iluminación y niebla, pero esos ajustes no añaden geometría ni corrigen proporciones exageradas.
 - [Shuriken Studio — naturaleza GLB](https://shuriken.studio/models/nature): buscar árboles, arbustos y flores. Para cerezos exige copas frondosas, flores densas y ramas naturales. El cerezo pelón de Innerscene que ya se rechazó no debe volver a descargarse.
 - [Sketchfab — santuarios japoneses descargables](https://sketchfab.com/search?features=downloadable&type=models&q=japanese%20shrine): revisa licencia y detalle. Evita los resultados low-poly.
 - [Sketchfab — cerezos en flor descargables](https://sketchfab.com/search?features=downloadable&type=models&q=cherry%20blossom%20tree): inspecciona la copa en vista 3D; no aceptar árboles escasos o con aspecto de videojuego low-poly.
@@ -69,8 +69,9 @@ Para los personajes, usa cuerpos completos; piezas sueltas como pelo, ojos, arma
 
 ## 4. Reglas de calidad y licencia
 
-- No usar low-poly como dirección artística.
+- El estilo definitivo no será low-poly; se permite temporalmente en elementos secundarios gratuitos y seleccionados.
 - No usar geometría procedural como sustituto de edificios, árboles, muebles o personajes.
+- La iluminación, los materiales y el postprocesado pueden armonizar assets sencillos, pero no convertir geometría low-poly en geometría detallada.
 - No asumir que un modelo gratuito permite cualquier uso: guarda su licencia y atribuciones.
 - Evitar archivos con texturas externas faltantes; GLB suele ser más sencillo porque puede incluirlas.
 - Comprobar escala, orientación, materiales, rig y animaciones en Godot 3.6.3.
