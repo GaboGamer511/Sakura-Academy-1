@@ -91,7 +91,7 @@ static func build_all(parent):
 		instance.scale = definition.scale
 		parent.add_child(instance)
 
-		# Los materiales del entorno se sombrean en toon sin contorno negro.
+		# Se armonizan materiales importados sin reemplazar sus mapas PBR ni su geometría.
 		Toon.apply(instance, 0.0)
 		_add_mesh_collisions(instance)
 
