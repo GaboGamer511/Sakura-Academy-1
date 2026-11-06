@@ -100,7 +100,7 @@ static func build_all(parent):
 		print("Sakura Academy: escena importada: ", definition.name, " <- ", model_path)
 
 	if loaded_count == 0:
-		push_warning("No hay paquetes de escenarios 3D instalados en res://models/. No se generará un mapa de cubos de sustitución.")
+		print("Sakura Academy: faltan los escenarios 3D en res://models/. El mundo se mantiene sin sustitutos geométricos.")
 	return loaded_count
 
 
