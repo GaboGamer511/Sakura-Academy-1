@@ -31,5 +31,6 @@ static func _make_polished_material(source):
 	# Conservar albedo, mapas normal/roughness/metallic, transparencia y emisión.
 	# Solo limitar reflejos excesivos y evitar brillos plásticos en kits estilizados.
 	material.roughness = clamp(material.roughness, 0.58, 0.88)
-	material.specular = min(material.specular, 0.42)
+	# En Godot 3 la propiedad se llama metallic_specular, no specular.
+	material.metallic_specular = min(material.metallic_specular, 0.42)
 	return material
