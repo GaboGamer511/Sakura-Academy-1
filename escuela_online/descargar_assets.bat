@@ -1,39 +1,53 @@
-# Sakura Academy — inventario de recursos 3D
+@echo off
+setlocal EnableExtensions
+chcp 65001 >nul
+title Sakura Academy - Instalador de modelos 3D
 
-## Objetivo
-Un campus japonés de primavera, luminoso y acogedor. Los cerezos en flor deben ser el rasgo visual principal, acompañados de jardines y mobiliario coherentes.
+cd /d "%~dp0"
+if not exist "models" mkdir "models"
+if not exist "_descargas" mkdir "_descargas"
 
-## Primer paquete ambiental seleccionado
+echo.
+echo ================================================
+echo       SAKURA ACADEMY - RECURSOS 3D
+echo ================================================
+echo.
+echo Este instalador NO crea modelos ni escenarios.
+echo Extrae archivos ZIP que hayas descargado y revisado.
+echo Usa modelos 3D reales compatibles con Godot 3.6.3.
+echo.
 
-**Low Poly Trees Pack — Riclmbr**
-- Página de descarga: https://riclmbr.itch.io/low-poly-trees-pack
-- Archivo: `LowPolyTreesPack.zip` (11 MB)
-- Contenido anunciado: 26 modelos de árboles y elementos de naturaleza, incluido Cherry Blossom, arbustos y bonsái.
-- Formato: un GLB con los modelos y tres atlas de textura compartidos.
-- Presupuesto anunciado por el autor: aproximadamente 7.2K triángulos en todo el paquete.
-- Licencia declarada: CC0 1.0; permite uso comercial y modificaciones sin atribución obligatoria.
-- Motivo de selección: tamaño reducido, bajo recuento de triángulos, texturas compartidas y licencia clara.
+set "FOUND=0"
+for %%Z in ("_descargas\*.zip") do (
+    if exist "%%~fZ" (
+        set "FOUND=1"
+        echo Extrayendo: %%~nxZ
+        powershell -NoProfile -ExecutionPolicy Bypass -Command "Expand-Archive -LiteralPath '%%~fZ' -DestinationPath 'models\%%~nZ' -Force"
+        if errorlevel 1 (
+            echo ERROR al extraer %%~nxZ
+        ) else (
+            echo Listo: models\%%~nZ
+        )
+        echo.
+    )
+)
 
-### Instalación
-1. Descarga el ZIP desde la página oficial del autor.
-2. Copia `LowPolyTreesPack.zip` en `escuela_online/_descargas/`.
-3. Ejecuta `descargar_assets.bat`.
-4. El ZIP se extraerá en `escuela_online/models/LowPolyTreesPack/`.
-5. Abre Godot y deja que importe únicamente este paquete nuevo.
+if "%FOUND%"=="0" (
+    echo No se encontraron ZIP en _descargas.
+    echo.
+    echo Descarga paquetes 3D con licencia compatible y coloca
+    echo sus archivos ZIP en esta carpeta antes de ejecutar el BAT.
+)
 
-El paquete todavía no se incluye como binario en Git: la conexión de edición del repositorio permite escribir archivos de texto, pero no transferir el ZIP binario desde itch.io. No se debe afirmar que los modelos ya están instalados hasta que el archivo exista en `models/` y Godot lo haya importado.
-
-## Presupuesto de importación
-- Incorporar un paquete pequeño y comprobado antes de sumar otro.
-- No descargar colecciones completas de personajes, edificios y animaciones si no se van a utilizar.
-- Mantener los ZIP originales en `_descargas/` para no volver a descargarlos.
-- No importar variantes de 4K ni duplicados de texturas si existe un atlas compartido.
-- Probar el tiempo de importación y el uso de memoria en Godot 3.6.3 antes de añadir más recursos.
-
-## Siguientes recursos a buscar
-1. Edificio escolar modular o campus japonés de bajo peso.
-2. Bancos, faroles, macetas y mobiliario exterior.
-3. Modelos de personajes anime riggeados con animaciones compatibles.
-4. Efectos de pétalos opcionales y limitados.
-
-Cada recurso nuevo debe tener formato, tamaño, licencia y compatibilidad verificados antes de añadirse.
+echo.
+echo IMPORTANTE:
+echo - No descargues ni instales modelos low poly como estilo artistico.
+echo - Revisa la calidad, licencia, formato y tamano de cada paquete.
+echo - El cerezo de Innerscene anterior fue descartado.
+echo - No se han incluido modelos automaticamente en el repositorio.
+echo.
+echo Abre project.godot con Godot 3.6.3 para importar los recursos.
+echo Revisa AMBIENTE_VISUAL.md y SAKURA_ASSETS.md.
+echo.
+pause
+endlocal
