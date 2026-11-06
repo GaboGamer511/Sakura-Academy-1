@@ -71,7 +71,7 @@ static func characters():
 	var ranked = []
 	for path in list_models():
 		var score = _character_score(path)
-		if score >= 0:
+		if score > 0:
 			ranked.append({"path": path, "score": score})
 	for i in range(ranked.size()):
 		for j in range(i + 1, ranked.size()):
