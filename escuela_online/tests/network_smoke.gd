@@ -7,8 +7,6 @@ const NetworkScript = preload("res://Network.gd")
 
 var network_node = null
 var role = ""
-var elapsed = 0.0
-var stable_roster_time = 0.0
 
 
 func _init():
@@ -38,25 +36,25 @@ func _start_probe():
 			_fail("No se pudo iniciar el cliente ENet: %d" % err)
 			return
 		print("NETWORK_SMOKE_CLIENT_CONNECTING")
-	set_process(true)
+	_watch_roster()
 
 
-func _process(delta):
-	elapsed += delta
-	if network_node != null and network_node.players.size() >= 3:
-		stable_roster_time += delta
-		# Da tiempo a que el segundo RPC de registro alcance al servidor.
-		if stable_roster_time >= 2.0:
-			print("NETWORK_SMOKE_OK role=%s peers=%d" % [role, network_node.players.size()])
-			network_node.leave_game()
-			quit(0)
-			return
-	else:
-		stable_roster_time = 0.0
-
-	if elapsed > 35.0:
-		var count = 0 if network_node == null else network_node.players.size()
-		_fail("Timeout: role=%s roster=%d" % [role, count])
+func _watch_roster():
+	var elapsed = 0.0
+	var stable_time = 0.0
+	while elapsed < 35.0:
+		yield(create_timer(0.25), "timeout")
+		elapsed += 0.25
+		if network_node != null and network_node.players.size() >= 3:
+			stable_time += 0.25
+			if stable_time >= 2.0:
+				print("NETWORK_SMOKE_OK role=%s peers=%d" % [role, network_node.players.size()])
+				network_node.leave_game()
+				quit(0)
+				return
+		else:
+			stable_time = 0.0
+	_fail("Timeout: role=%s roster=%d" % [role, 0 if network_node == null else network_node.players.size()])
 
 
 func _fail(message):
