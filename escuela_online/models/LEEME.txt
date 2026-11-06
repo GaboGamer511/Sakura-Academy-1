@@ -1,0 +1,23 @@
+CARPETA DE MODELOS
+==================
+Pon aquí tus modelos exportados como glTF binario (.glb):
+
+  player.glb   -> tu personaje (lo usan todos los jugadores)
+  school.glb   -> tu escuela / escenario (reemplaza la escuela de cajas)
+
+Cómo exportar desde Blender: File > Export > glTF 2.0 (.glb)
+  - Marca "Apply Modifiers".
+  - Si el personaje tiene animaciones, deja marcado "Animation" y "Skinning".
+
+Animaciones (el juego las busca por nombre, sin importar mayúsculas):
+  idle    -> parado
+  run     -> correr (o "walk" si no tienes run)
+  roll    -> esquivar (opcional)
+  attack  -> golpe (opcional)
+Puedes bajar animaciones gratis de Mixamo y combinarlas en Blender.
+
+Ajustes si algo se ve mal (constantes al inicio de Player.gd y World.gd):
+  MODEL_SCALE       -> tamaño del personaje
+  MODEL_YAW_OFFSET  -> 180 si mira hacia atrás
+  OUTLINE_THICKNESS -> grosor del contorno
+  USE_TOON          -> false para ver los materiales originales

@@ -1,0 +1,26 @@
+; Engine configuration file.
+; Proyecto base multijugador - Godot 3.2+
+
+config_version=4
+
+[application]
+
+config/name="Escuela Online"
+run/main_scene="res://Main.tscn"
+
+[autoload]
+
+Network="*res://Network.gd"
+Stats="*res://Stats.gd"
+GameClock="*res://GameClock.gd"
+Quests="*res://Quests.gd"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+environment/default_environment=""
