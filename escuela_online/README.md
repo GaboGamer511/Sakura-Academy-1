@@ -30,6 +30,14 @@ Consulta:
 - `MAPA_MUNDO.md`: distribución conceptual y prioridades de construcción.
 - `PERSONAJES.md`: dirección de diseño de personajes.
 
+## Descargas seleccionadas (candidatos, no modelos finales aprobados)
+
+- **Paquete de escuela Shuriken Studio (ZIP, GLB, 1.4 MB):** [descarga directa](https://shuriken.studio/kits/school/download). Incluye edificio escolar y conjuntos de interiores. Es una base de prueba estilizada; excluye el conjunto llamado `Low-Poly Classroom` y revisa la apariencia del resto antes de integrarlo.
+- **Escuela japonesa y calle comercial — escena GLB (CC0):** [descarga directa del GLB](https://cdn.3dassets.dev/assets/30098/v1/model.glb). [Ficha del paquete y licencia](https://3dassets.dev/packs/japanese-school-and-city-street). Es un candidato para inspección visual, no una academia definitiva aprobada.
+- **Pueblo japonés Shuriken:** [ficha del paquete](https://shuriken.studio/kits/japanese-town). **Descartado para el juego:** la propia ficha lo identifica expresamente como low-poly.
+
+La iluminación, los materiales y el postprocesado pueden mejorar el acabado, pero no corrigen proporciones chibi ni geometría low-poly. La selección final debe tener siluetas y proporciones adecuadas antes de aplicar iluminación.
+
 ## Recursos 3D
 Los modelos se detectan recursivamente dentro de `models/` en formatos glTF/GLB. Coloca los ZIP en `_descargas/` y ejecuta `descargar_assets.bat`; el escáner reconoce modelos por palabras clave en los nombres de archivo. Antes de aceptar un recurso hay que revisar calidad visual, licencia, formato, materiales, texturas y compatibilidad con Godot 3.6.3. Un modelo pequeño no es automáticamente adecuado.
 
