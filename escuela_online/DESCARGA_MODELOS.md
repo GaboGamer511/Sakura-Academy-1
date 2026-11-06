@@ -11,11 +11,14 @@ Estas son fuentes y páginas para buscar recursos. No significa que todos los mo
 - [Shuriken Studio — personajes y criaturas GLB](https://shuriken.studio/models/characters): catálogo de modelos GLB. Examina cada modelo; no selecciones los que tengan estética low-poly.
 
 ### Academia, edificios y mobiliario
+- [DESCARGA DIRECTA — Shuriken Studio School (ZIP, GLB, 1.4 MB)](https://shuriken.studio/kits/school/download): incluye edificio escolar y conjuntos de aulas, cafetería, gimnasio, laboratorio y biblioteca. Candidato provisional estilizado; excluye el archivo `Low-Poly Classroom` y no lo consideres la academia definitiva sin inspeccionarlo.
+- [DESCARGA DIRECTA — Escuela japonesa y calle comercial (GLB, CC0)](https://cdn.3dassets.dev/assets/30098/v1/model.glb): escena de prueba con escuela y calle. [Ficha del paquete, piezas y licencia](https://3dassets.dev/packs/japanese-school-and-city-street). Inspeccionar antes de aprobar; no sustituye todavía el campus completo.
 - [Innerscene — School building (GLB, CC0)](https://www.innerscene.com/tools/library/3d-parts/school-building-1f9f21e3): edificio escolar de ladrillo de estilo histórico. Puede servir como referencia/estructura secundaria, pero **no está aprobado como academia final anime**; comprueba su aspecto antes de incorporarlo.
 - [Shuriken Studio — edificios GLB](https://shuriken.studio/models/buildings): busca edificios y piezas de campus; inspecciona el estilo de cada descarga y evita cualquier recurso low-poly.
 - [Shuriken Studio — muebles GLB](https://shuriken.studio/models/furniture): busca aulas, biblioteca, cafetería y oficinas. Revisa cada pieza individualmente.
 
 ### Japón tradicional, naturaleza y cerezos
+- [Shuriken Studio — Japanese Town (ficha)](https://shuriken.studio/kits/japanese-town): **DESCARTADO para Sakura Academy** porque el propio autor lo clasifica como low-poly. No descargarlo para integrar. Seguiremos buscando arquitectura tradicional con más detalle y proporciones menos caricaturescas.
 - [Shuriken Studio — naturaleza GLB](https://shuriken.studio/models/nature): buscar árboles, arbustos y flores. Para cerezos exige copas frondosas, flores densas y ramas naturales. El cerezo pelón de Innerscene que ya se rechazó no debe volver a descargarse.
 - [Sketchfab — santuarios japoneses descargables](https://sketchfab.com/search?features=downloadable&type=models&q=japanese%20shrine): revisa licencia y detalle. Evita los resultados low-poly.
 - [Sketchfab — cerezos en flor descargables](https://sketchfab.com/search?features=downloadable&type=models&q=cherry%20blossom%20tree): inspecciona la copa en vista 3D; no aceptar árboles escasos o con aspecto de videojuego low-poly.
