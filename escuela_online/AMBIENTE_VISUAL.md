@@ -25,7 +25,8 @@ El juego debe conservar su modo online/multijugador como parte central de su dis
 - No afirmar que el online está probado si no se ha ejecutado una prueba real con varios clientes.
 
 ## Identidad visual
-- Anime 3D moderno y detallado; **no low poly**.
+- Anime 3D moderno y detallado como identidad definitiva.
+- Se permite low-poly temporal, gratuito y selectivo en el distrito urbano secundario y elementos de fondo para cuidar el rendimiento; no debe dominar la academia, los personajes protagonistas ni los elementos emblemáticos.
 - No usar geometría procedural como sustituto de modelos artísticos.
 - Personajes con siluetas diferenciadas, rostros expresivos, cabello trabajado y ropa con pliegues y materiales.
 - Arquitectura con geometría real, ventanas, marcos, aleros, barandillas, interiores y mobiliario.
@@ -35,10 +36,11 @@ El juego debe conservar su modo online/multijugador como parte central de su dis
 - Iluminación cuidada, colores vivos, atmósfera primaveral y cambios ambientales por región.
 
 ## Calidad de los assets
-Todo modelo ambiental o personaje debe evaluarse visualmente antes de aceptarlo. Revisar densidad y forma de la copa en los cerezos, proporciones, materiales, texturas, escala, licencia y compatibilidad con Godot 3.6.3. Un archivo pequeño no es automáticamente un buen recurso. No aceptar un asset solo por su peso o número de polígonos.
+Todo modelo ambiental o personaje debe evaluarse visualmente antes de aceptarlo. Los assets low-poly temporales requieren una revisión adicional de silueta y proporciones, y deben poder sustituirse sin rehacer la lógica del juego. Revisar densidad y forma de la copa en los cerezos, proporciones, materiales, texturas, escala, licencia y compatibilidad con Godot 3.6.3. Un archivo pequeño no es automáticamente un buen recurso. No aceptar un asset solo por su peso o número de polígonos.
 
 ## Rendimiento sin degradar el estilo
 - Reutilizar recursos, materiales y atlas donde sea posible.
+- Usar low-poly solo como compromiso temporal y selectivo; no asumir que una iluminación bonita puede reparar una malla pobre.
 - LOD únicamente para objetos lejanos; conservar el modelo detallado cerca del jugador.
 - Culling y visibilidad por sectores para no renderizar zonas ocultas.
 - Texturas con resolución adecuada a su tamaño en pantalla y compresión compatible.
