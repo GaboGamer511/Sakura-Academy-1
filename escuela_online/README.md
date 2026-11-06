@@ -1,53 +1,51 @@
-# Escuela Online — BETA (Godot 3.2+, GLES2)
+# Sakura Academy — beta multijugador (Godot 3.6.3, GLES2)
 
-Simulador de vida escolar japonesa, multijugador (host + amigos por IP).
+Proyecto de simulación social escolar anime 3D con multijugador por ENet. El desarrollo visual apunta a modelos 3D reales y detallados; no low poly ni escenarios construidos proceduralmente.
 
 ## Cómo abrirlo
-1. Ejecuta `descargar_assets.bat` (baja los muebles y descomprime lo que pongas en `_descargas`).
-2. Abre `project.godot` en Godot 3.2+ y deja que importe (la primera vez tarda).
-3. F5. Elige tu nombre y personaje, **Crear partida** (o **Unirse** con la IP del host) y **Empezar**.
+1. Ejecuta `descargar_assets.bat` para extraer los paquetes ZIP que hayas colocado en `_descargas/`.
+2. Abre `project.godot` con Godot 3.6.3 y permite importar los recursos.
+3. Ejecuta F5. Crea una partida como anfitrión o únete con la IP del host.
 
 ## Controles
-WASD mover · Espacio esquivar (gasta stamina, eres invulnerable mientras ruedas) · Clic izquierdo atacar ·
-E hablar con NPCs · Enter chat · Rueda del mouse zoom · Esc suelta el mouse
+WASD mover · Espacio esquivar · Clic izquierdo atacar · E hablar con NPCs · Enter chat · Rueda del mouse zoom · Esc suelta el mouse.
 
-## Qué trae la beta
-- **Reloj escolar**: 1 s real = 1 min del juego (un día = 24 min). Periodos: Mañana, Clases, Almuerzo,
-  Clubes, Atardecer, Noche, y fin de semana. Ciclo día/noche con el sol moviéndose.
-- **Misiones** (cada jugador lleva las suyas, se guardan solas en `user://escuela_save.json`):
-  1. Bienvenido a la escuela (entra a un aula) — Prof. Sato
-  2. Atención en clase (estudia 60 s en un aula en horario de clases) — Prof. Sato
-  3. Libros perdidos (recoge 5 libros azules, reaparecen cada día) — Mika
-  4. Prueba del club de kendo (derrota 3 muñecos en el dojo) — Capitán Takeda
-  5. El rival del patio oeste (derrota a Kurogane en la arena de piedra) — Capitán Takeda
-- **Progreso**: nivel, XP, dinero (¥) y estudio; subir de nivel da más vida y más daño.
-- **Combate**: el servidor (host) decide el daño. Los muñecos reaparecen; Kurogane persigue y ataca
-  con aviso (esquiva cuando levante la espada). Si mueres pierdes 10% del dinero y reapareces.
-- **Duelos entre jugadores** solo dentro del dojo (hacen la mitad de daño).
-- **Chat**, nombres y barras de vida sobre los personajes.
-- **Estilo anime**: cel-shading con contorno (`Toon.gd`, `shaders/`).
+## Sistemas existentes de la beta
+- Lobby para crear o unirse a partidas por IP.
+- Red ENet con hasta 8 jugadores, sincronización de movimiento y chat.
+- Reloj escolar y ciclo día/noche.
+- Misiones, progreso, experiencia, dinero y guardado local.
+- NPCs, combate, dojo y duelos entre jugadores.
+- HUD, barras y nombres sobre jugadores.
 
-## Dirección visual Sakura
-El campus busca un acabado anime 3D moderno (no low poly): cerezos detallados, jardines, edificios escolares cuidados y una atmósfera primaveral. La optimización se hará con LOD, visibilidad, materiales compartidos y control de sombras/texturas. Consulta `AMBIENTE_VISUAL.md` y `SAKURA_ASSETS.md`.
+Estos sistemas existentes deben conservarse durante la ampliación del mundo. La estabilidad online debe probarse con varios clientes; no se considera validada por una simple ejecución local.
 
-## Modelos
-Se detectan solos dentro de `models/` (cualquier subcarpeta): `.glb` / `.gltf`.
-- El selector del lobby lista los personajes encontrados; los modelos de árboles, flores y vegetación se excluyen del selector.
-- Escuela propia: un modelo con "school" o "classroom" en el nombre reemplaza la escuela de cajas.
-- Pupitres: un modelo con "desk" en el nombre (`.glb/.gltf/.obj/.dae`) reemplaza las cajas de pupitres.
-- Si el modelo no trae animaciones, el juego anima solo (rebote al caminar, estocada al atacar).
-  Si trae animaciones llamadas idle / run (o walk) / attack, las usa.
+## Escala y diseño del mundo
+El objetivo es un **mapa mediano, compacto y densamente ambientado**. Sakura Academy será claramente la zona más grande e imponente. A su alrededor habrá regiones secundarias más pequeñas: distrito urbano, zona de santuario/templo, costa y naturaleza. No se busca un mundo enorme con largos trayectos vacíos.
 
-## Jugar con amigos por Internet
-Abre el puerto **UDP 7777** en el router hacia el PC del host, o usa ZeroTier / Radmin VPN.
+Consulta:
+- `AMBIENTE_VISUAL.md`: dirección artística, escala, regiones y reglas de desarrollo.
+- `SAKURA_ASSETS.md`: criterios de calidad y recursos aceptables.
+- `MAPA_MUNDO.md`: distribución conceptual y prioridades de construcción.
+- `PERSONAJES.md`: dirección de diseño de personajes.
 
-## Estructura
-- Autoloads: `Network.gd` (conexión, chat), `Stats.gd` (nivel, dinero, guardado), `GameClock.gd`
-  (hora y periodos), `Quests.gd` (misiones).
-- `Main.gd` lobby · `World.gd` mundo/luz/zonas/combate · `Level.gd` geometría · `HUD.gd` interfaz.
-- `Player.gd`, `NPC.gd`, `Enemy.gd`, `Avatar.gd` (cuerpo visual y animación procedural).
-- `Models.gd` busca modelos · `Toon.gd` + `shaders/` estilo anime.
+## Recursos 3D
+Los modelos se detectan dentro de `models/` en formatos glTF/GLB. Antes de aceptar un recurso hay que revisar calidad visual, licencia, formato, materiales, texturas y compatibilidad con Godot 3.6.3. Un modelo pequeño no es automáticamente adecuado.
 
-## Ideas para después
-Más NPCs y misiones diarias, clubes con minijuegos, tienda con el dinero, uniformes, animaciones de
-Mixamo, servidor dedicado con instancias, cuentas y base de datos.
+El cerezo de Innerscene revisado anteriormente fue descartado por su copa demasiado escasa. No se debe reutilizar como árbol principal.
+
+## Online
+El modo online forma parte central del proyecto. Mantener lobby, ENet, sincronización, chat, autoridad del servidor y aparición de jugadores. Las nuevas regiones y actividades deben diseñarse para varios jugadores simultáneos. No modificar `Player.gd` ni su cámara/controles sin una necesidad concreta y sin preservar su comportamiento.
+
+## Estructura principal
+- `Main.gd` / `Main.tscn`: lobby.
+- `Network.gd`: conexión ENet, jugadores y chat.
+- `World.gd` / `World.tscn`: mundo, luz, zonas, NPCs y sistemas de juego.
+- `Level.gd`: construcción/carga del escenario (pendiente de migración completa a escenas y modelos 3D reales).
+- `Player.gd`: movimiento, cámara y sincronización del jugador.
+- `Avatar.gd`: modelo visual y animaciones.
+- `Models.gd`: búsqueda de modelos.
+- `HUD.gd`, `NPC.gd`, `Enemy.gd`, `Stats.gd`, `GameClock.gd`, `Quests.gd`: sistemas de juego.
+
+## Estado honesto
+La documentación y el instalador de ZIP están preparados, pero todavía no hay modelos 3D ambientales binarios integrados en `models/`. El escenario visual definitivo no está construido ni probado. No se debe confundir el plan de mundo con contenido ya implementado.
