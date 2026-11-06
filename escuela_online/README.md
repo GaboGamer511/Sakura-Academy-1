@@ -28,7 +28,7 @@ E hablar con NPCs · Enter chat · Rueda del mouse zoom · Esc suelta el mouse
 - **Estilo anime**: cel-shading con contorno (`Toon.gd`, `shaders/`).
 
 ## Dirección visual Sakura
-El campus se orienta a una primavera japonesa luminosa: cerezos en flor, jardines, caminos, madera clara, edificios escolares acogedores y pétalos opcionales de bajo coste. Consulta `AMBIENTE_VISUAL.md` y `SAKURA_ASSETS.md` para la guía artística y el inventario de recursos.
+El campus busca un acabado anime 3D moderno (no low poly): cerezos detallados, jardines, edificios escolares cuidados y una atmósfera primaveral. La optimización se hará con LOD, visibilidad, materiales compartidos y control de sombras/texturas. Consulta `AMBIENTE_VISUAL.md` y `SAKURA_ASSETS.md`.
 
 ## Modelos
 Se detectan solos dentro de `models/` (cualquier subcarpeta): `.glb` / `.gltf`.
