@@ -1,6 +1,6 @@
 # Sakura Academy — beta multijugador (Godot 3.6.3, GLES2)
 
-Proyecto de simulación social escolar anime 3D con multijugador por ENet. El desarrollo visual apunta a modelos 3D reales y detallados; no low poly ni escenarios construidos proceduralmente.
+Proyecto de simulación social escolar anime 3D con multijugador por ENet. El estilo principal apunta a anime 3D moderno y detallado. Se permite usar temporalmente algunos modelos low-poly gratuitos, de forma selectiva y sobre todo en zonas secundarias, para cuidar el rendimiento; no serán el estándar visual definitivo. No se construyen escenarios mediante geometría procedural.
 
 ## Cómo abrirlo
 1. Ejecuta `descargar_assets.bat` para extraer los paquetes ZIP que hayas colocado en `_descargas/`.
@@ -37,7 +37,7 @@ Consulta:
 ### Pueblo japonés
 - [Casa japonesa tradicional — GLB gratuito, CC0](https://grab3d.com/models/buildings/japanese-house/): casa de madera con tejado de teja, paneles shoji y veranda. El sitio ofrece GLB de calidad completa y versión ligera; elegir GLB para Godot.
 - [Casa de té — GLB gratuito, CC0](https://grab3d.com/models/buildings/tea-house/): edificio tradicional con veranda, puertas correderas y farol.
-- [Japanese Town de Shuriken Studio](https://shuriken.studio/kits/japanese-town): **NO DESCARGAR**. Aunque es gratuito, la ficha clasifica varios edificios como low-poly y no cumple nuestra dirección artística.
+- [Japanese Town de Shuriken Studio](https://shuriken.studio/kits/japanese-town): **opción provisional gratuita** para probar casas, tiendas y elementos secundarios del distrito. Aceptamos temporalmente su estilo low-poly si encaja en escala y silueta; no usarlo como estilo de la academia ni como referencia definitiva.
 
 Estos modelos gratuitos sirven como piezas iniciales, no forman todavía un pueblo completo. El distrito debe seguir siendo compacto y denso; no se deben fingir edificios que aún no tenemos.
 
@@ -49,7 +49,7 @@ Estos modelos gratuitos sirven como piezas iniciales, no forman todavía un pueb
 ## Recursos 3D
 Los modelos se detectan recursivamente dentro de `models/` en formatos glTF/GLB. Coloca los ZIP en `_descargas/` y ejecuta `descargar_assets.bat`; el escáner reconoce modelos por palabras clave en los nombres de archivo. Antes de aceptar un recurso hay que revisar calidad visual, licencia, formato, materiales, texturas y compatibilidad con Godot 3.6.3. Un modelo pequeño no es automáticamente adecuado.
 
-El cerezo de Innerscene revisado anteriormente fue descartado por su copa demasiado escasa. No se debe reutilizar como árbol principal.
+El cerezo de Innerscene revisado anteriormente fue descartado por su copa demasiado escasa. No se debe reutilizar como árbol principal. La excepción low-poly es temporal y selectiva; los cerezos protagonistas, la academia y los personajes mantienen el estándar visual detallado.
 
 ## Online
 El modo online forma parte central del proyecto. Mantener lobby, ENet, sincronización, chat, autoridad del servidor y aparición de jugadores. Las nuevas regiones y actividades deben diseñarse para varios jugadores simultáneos. No modificar `Player.gd` ni su cámara/controles sin una necesidad concreta y sin preservar su comportamiento.
