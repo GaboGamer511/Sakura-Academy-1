@@ -33,6 +33,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/godot"
           unzip -q godot-headless.zip -d "$RUNNER_TEMP/godot"
           chmod +x "$RUNNER_TEMP/godot/Godot_v3.6.3-stable_linux_headless.64"
+          ln -sf "$RUNNER_TEMP/godot/Godot_v3.6.3-stable_linux_headless.64" "$RUNNER_TEMP/godot/godot"
           echo "$RUNNER_TEMP/godot" >> "$GITHUB_PATH"
 
       - name: Verify engine version
