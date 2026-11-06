@@ -21,6 +21,7 @@ var aula_count = 0
 var study_acc = 0.0
 var study_ticks = 0
 var books = []
+var books_by_id = {}
 
 
 func _ready():
@@ -64,9 +65,17 @@ func _spawn_player(id):
 	p.player_name = Network.players[id]
 	p.player_id = id
 	p.model_path = Network.models.get(id, "")
-	p.translation = Vector3(rand_range(-3, 3), 1.5, rand_range(5, 9))
+	p.translation = _spawn_position(id)
 	add_child(p)
 	spawned[id] = p
+
+
+# El mismo ID obtiene el mismo punto en todos los peers.
+func _spawn_position(id):
+	var index = max(0, int(id) - 1)
+	var column = index % 4
+	var row = int(index / 4)
+	return Vector3(-3.0 + column * 2.0, 1.5, 7.0 + row * 2.5)
 
 
 func _on_peer_left(id):
@@ -227,9 +236,12 @@ func _spawn_books():
 		if is_instance_valid(b):
 			b.queue_free()
 	books.clear()
-	for p in BOOK_SPOTS:
+	books_by_id.clear()
+	for i in range(BOOK_SPOTS.size()):
 		var a = Area.new()
-		a.translation = p
+		a.name = "Book_%d" % i
+		a.translation = BOOK_SPOTS[i]
+		a.set_meta("book_id", i)
 		var cs = CollisionShape.new()
 		var ss = SphereShape.new()
 		ss.radius = 0.9
@@ -246,21 +258,58 @@ func _spawn_books():
 		mat.emission_energy = 1.5
 		mi.material_override = mat
 		a.add_child(mi)
-		a.connect("body_entered", self, "_on_book", [a])
+		a.connect("body_entered", self, "_on_book", [i])
 		add_child(a)
 		books.append(a)
+		books_by_id[i] = a
 
 
-func _on_book(body, area):
-	if not _is_local(body) or not is_instance_valid(area) or not books.has(area):
+func _on_book(body, book_id):
+	if not _is_local(body) or not books_by_id.has(book_id):
 		return
-	books.erase(area)
-	area.queue_free()
-	Quests.notify("collect", "book")
-	get_tree().call_group("hud", "toast", "Encontraste un libro")
+	var collector_id = int(body.player_id)
+	if get_tree().is_network_server():
+		_server_collect_book(collector_id, book_id)
+	else:
+		rpc_id(1, "request_collect_book", book_id)
 
 
-func _on_new_day(_d):
+remote func request_collect_book(book_id):
+	if not get_tree().is_network_server():
+		return
+	_server_collect_book(get_tree().get_rpc_sender_id(), int(book_id))
+
+
+func _server_collect_book(player_id, book_id):
+	if not get_tree().is_network_server() or not books_by_id.has(book_id):
+		return
+	var p = spawned.get(player_id)
+	var book = books_by_id.get(book_id)
+	if p == null or book == null or p.dead:
+		return
+	if p.global_transform.origin.distance_to(book.global_transform.origin) > 2.0:
+		return
+	rpc("remove_book", book_id, player_id)
+
+
+remotesync func remove_book(book_id, collector_id):
+	var book = books_by_id.get(book_id)
+	if book != null and is_instance_valid(book):
+		books.erase(book)
+		books_by_id.erase(book_id)
+		book.queue_free()
+	if int(collector_id) == get_tree().get_network_unique_id():
+		Quests.notify("collect", "book")
+		get_tree().call_group("hud", "toast", "Encontraste un libro")
+
+
+func _on_new_day(day_number):
+	if not get_tree().is_network_server():
+		return
+	rpc("refresh_books_for_new_day", day_number)
+
+
+remotesync func refresh_books_for_new_day(_day_number):
 	_spawn_books()
 	get_tree().call_group("hud", "toast", "Nuevo día: " + GameClock.DAY_NAMES[GameClock.weekday_index()])
 
