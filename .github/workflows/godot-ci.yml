@@ -1,0 +1,150 @@
+name: Sakura Academy - Godot 3.6.3
+
+on:
+  push:
+    paths:
+      - "escuela_online/**"
+      - ".github/workflows/godot-ci.yml"
+  pull_request:
+    paths:
+      - "escuela_online/**"
+      - ".github/workflows/godot-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate project and multiplayer
+    runs-on: ubuntu-22.04
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download official Godot 3.6.3 headless
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            https://github.com/godotengine/godot/releases/download/3.6.3-stable/Godot_v3.6.3-stable_linux_headless.64.zip \
+            --output godot-headless.zip
+          mkdir -p "$RUNNER_TEMP/godot"
+          unzip -q godot-headless.zip -d "$RUNNER_TEMP/godot"
+          chmod +x "$RUNNER_TEMP/godot/Godot_v3.6.3-stable_linux_headless.64"
+          echo "$RUNNER_TEMP/godot" >> "$GITHUB_PATH"
+
+      - name: Verify engine version
+        shell: bash
+        run: |
+          godot --version
+          godot --version | grep -q '^3\.6\.3'
+
+      - name: Import and parse project
+        shell: bash
+        run: |
+          godot --headless --path escuela_online --editor --quit
+
+      - name: Load every GDScript
+        shell: bash
+        run: |
+          godot --headless --path escuela_online --script res://tests/validate_scripts.gd
+
+      - name: ENet loopback test (host + two clients)
+        shell: bash
+        run: |
+          set -euo pipefail
+          SERVER_LOG="$RUNNER_TEMP/net-server.log"
+          CLIENT1_LOG="$RUNNER_TEMP/net-client1.log"
+          CLIENT2_LOG="$RUNNER_TEMP/net-client2.log"
+
+          godot --headless --path escuela_online --script res://tests/network_smoke.gd -- --role=server >"$SERVER_LOG" 2>&1 &
+          SERVER_PID=$!
+          cleanup() {
+            kill "$SERVER_PID" 2>/dev/null || true
+          }
+          trap cleanup EXIT
+
+          sleep 2
+          timeout 40s godot --headless --path escuela_online --script res://tests/network_smoke.gd -- --role=client >"$CLIENT1_LOG" 2>&1 &
+          CLIENT1_PID=$!
+          timeout 40s godot --headless --path escuela_online --script res://tests/network_smoke.gd -- --role=client >"$CLIENT2_LOG" 2>&1 &
+          CLIENT2_PID=$!
+
+          wait "$CLIENT1_PID"
+          wait "$CLIENT2_PID"
+          wait "$SERVER_PID"
+          cat "$SERVER_LOG" "$CLIENT1_LOG" "$CLIENT2_LOG"
+          grep -q "NETWORK_SMOKE_OK" "$SERVER_LOG"
+          grep -q "NETWORK_SMOKE_OK" "$CLIENT1_LOG"
+          grep -q "NETWORK_SMOKE_OK" "$CLIENT2_LOG"
+
+      - name: Package editable Godot project
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          zip -qr dist/SakuraAcademy-Godot3.6.3-Project.zip escuela_online \
+            -x "escuela_online/.import/*" "escuela_online/.import/**" "escuela_online/.git/*"
+
+      - name: Upload validated project
+        uses: actions/upload-artifact@v4
+        with:
+          name: SakuraAcademy-Godot3.6.3-Project
+          path: dist/SakuraAcademy-Godot3.6.3-Project.zip
+          if-no-files-found: error
+          retention-days: 30
+
+  export-windows:
+    name: Export Windows executable
+    needs: validate
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Godot 3.6.3 and export templates
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          $godotZip = Join-Path $env:RUNNER_TEMP "godot-win.zip"
+          $templateZip = Join-Path $env:RUNNER_TEMP "godot-templates.zip"
+          Invoke-WebRequest -Uri "https://github.com/godotengine/godot/releases/download/3.6.3-stable/Godot_v3.6.3-stable_win64.exe.zip" -OutFile $godotZip
+          Invoke-WebRequest -Uri "https://github.com/godotengine/godot/releases/download/3.6.3-stable/Godot_v3.6.3-stable_export_templates.tpz" -OutFile $templateZip
+
+          $godotDir = Join-Path $env:RUNNER_TEMP "godot-win"
+          $templateDir = Join-Path $env:RUNNER_TEMP "godot-template-unpack"
+          Expand-Archive -LiteralPath $godotZip -DestinationPath $godotDir -Force
+          Expand-Archive -LiteralPath $templateZip -DestinationPath $templateDir -Force
+
+          $godotExe = Get-ChildItem -Path $godotDir -Filter "*.exe" -Recurse | Select-Object -First 1
+          if ($null -eq $godotExe) { throw "No se encontró el ejecutable de Godot." }
+          "GODOT_EXE=$($godotExe.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+          $sourceTemplates = Join-Path $templateDir "templates"
+          if (-not (Test-Path $sourceTemplates)) { $sourceTemplates = $templateDir }
+          $targetTemplates = Join-Path $env:APPDATA "Godot\templates\3.6.3.stable"
+          New-Item -ItemType Directory -Force -Path $targetTemplates | Out-Null
+          Copy-Item -Path (Join-Path $sourceTemplates "*") -Destination $targetTemplates -Recurse -Force
+
+      - name: Import project and export Windows build
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          New-Item -ItemType Directory -Force -Path "dist" | Out-Null
+          & $env:GODOT_EXE --headless --path "escuela_online" --editor --quit
+          if ($LASTEXITCODE -ne 0) { throw "Godot no pudo importar el proyecto." }
+          & $env:GODOT_EXE --headless --path "escuela_online" --export-release "Windows Desktop" "$env:GITHUB_WORKSPACE\dist\SakuraAcademy.exe"
+          if ($LASTEXITCODE -ne 0) { throw "Falló la exportación de Windows." }
+          if (-not (Test-Path "dist/SakuraAcademy.exe")) { throw "No se generó SakuraAcademy.exe." }
+
+      - name: Upload Windows build
+        uses: actions/upload-artifact@v4
+        with:
+          name: SakuraAcademy-Windows-x64
+          path: |
+            dist/SakuraAcademy.exe
+          if-no-files-found: error
+          retention-days: 30
