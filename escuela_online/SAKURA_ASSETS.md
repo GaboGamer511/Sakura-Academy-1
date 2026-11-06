@@ -1,39 +1,45 @@
-# Sakura Academy — inventario de recursos 3D
+# Sakura Academy — inventario y criterios de calidad 3D
 
-## Objetivo
-Un campus japonés de primavera, luminoso y acogedor. Los cerezos en flor deben ser el rasgo visual principal, acompañados de jardines y mobiliario coherentes.
+## Dirección artística (no low poly)
+Sakura Academy busca un acabado anime 3D moderno: personajes estilizados con rostros expresivos y cabello trabajado; edificios con arquitectura cuidada; vegetación frondosa; materiales PBR o toon bien pintados; iluminación cálida y composición colorida.
 
-## Primer paquete ambiental seleccionado
+**No se usará low poly como estilo artístico.** Tampoco se confundirá optimización con degradar todos los modelos. Se priorizan recursos de buena calidad visual, con geometría y texturas razonables para el equipo objetivo.
 
-**Low Poly Trees Pack — Riclmbr**
-- Página de descarga: https://riclmbr.itch.io/low-poly-trees-pack
-- Archivo: `LowPolyTreesPack.zip` (11 MB)
-- Contenido anunciado: 26 modelos de árboles y elementos de naturaleza, incluido Cherry Blossom, arbustos y bonsái.
-- Formato: un GLB con los modelos y tres atlas de textura compartidos.
-- Presupuesto anunciado por el autor: aproximadamente 7.2K triángulos en todo el paquete.
-- Licencia declarada: CC0 1.0; permite uso comercial y modificaciones sin atribución obligatoria.
-- Motivo de selección: tamaño reducido, bajo recuento de triángulos, texturas compartidas y licencia clara.
+## Primer recurso de cerezo seleccionado
 
-### Instalación
-1. Descarga el ZIP desde la página oficial del autor.
-2. Copia `LowPolyTreesPack.zip` en `escuela_online/_descargas/`.
-3. Ejecuta `descargar_assets.bat`.
-4. El ZIP se extraerá en `escuela_online/models/LowPolyTreesPack/`.
-5. Abre Godot y deja que importe únicamente este paquete nuevo.
+**Flowering Cherry Tree — Innerscene**
+- Página: https://www.innerscene.com/tools/library/3d-parts/flowering-cherry-tree-6d80049e
+- Formato GLB, aproximadamente 5.1 MB.
+- Licencia declarada: CC0.
+- Modelo de cerezo en flor con materiales, dimensiones reales.
+- El modelo es un árbol estático; no incluye animación de ramas.
+- No se ha probado aún en Godot 3.6.3 ni en Intel HD 3000.
 
-El paquete todavía no se incluye como binario en Git: la conexión de edición del repositorio permite escribir archivos de texto, pero no transferir el ZIP binario desde itch.io. No se debe afirmar que los modelos ya están instalados hasta que el archivo exista en `models/` y Godot lo haya importado.
+Es un candidato inicial para probar calidad, materiales y rendimiento, no una afirmación de que el árbol ya esté integrado en el nivel.
 
-## Presupuesto de importación
-- Incorporar un paquete pequeño y comprobado antes de sumar otro.
-- No descargar colecciones completas de personajes, edificios y animaciones si no se van a utilizar.
-- Mantener los ZIP originales en `_descargas/` para no volver a descargarlos.
-- No importar variantes de 4K ni duplicados de texturas si existe un atlas compartido.
-- Probar el tiempo de importación y el uso de memoria en Godot 3.6.3 antes de añadir más recursos.
+## Instalación y estado
+La conexión disponible para editar GitHub permite actualizar archivos de texto, pero no transferir directamente este binario GLB al repositorio. Por eso el recurso todavía no está incluido en `models/`.
 
-## Siguientes recursos a buscar
-1. Edificio escolar modular o campus japonés de bajo peso.
-2. Bancos, faroles, macetas y mobiliario exterior.
-3. Modelos de personajes anime riggeados con animaciones compatibles.
-4. Efectos de pétalos opcionales y limitados.
+Cuando se descargue el GLB desde la página del autor, colócalo en:
+`escuela_online/models/environment/flowering-cherry-tree.glb`
 
-Cada recurso nuevo debe tener formato, tamaño, licencia y compatibilidad verificados antes de añadirse.
+Después abre el proyecto con Godot 3.6.3 y permite importar solo ese archivo. Comprueba escala, materiales, transparencia de flores y tiempo de importación antes de poblar el campus.
+
+## Cómo conseguir calidad sin desperdiciar rendimiento
+- Mantener modelos principales detallados a corta distancia y usar LOD/modelos de menor detalle solo a distancia, sin cambiar la identidad artística.
+- Reutilizar materiales y atlas cuando sea posible.
+- Compartir meshes/materiales para objetos repetidos y evitar cientos de materiales únicos.
+- Usar frustum culling y visibilidad por zonas; no dibujar interiores o edificios que el jugador no puede ver.
+- Limitar sombras dinámicas a elementos importantes; probar sombras horneadas donde convenga.
+- Controlar tamaño de texturas según el tamaño en pantalla; no cargar 4K por defecto.
+- Mantener efectos transparentes (pétalos, partículas) contenidos, porque el overdraw puede costar mucho.
+- Cargar el campus por sectores si el tamaño crece.
+- Medir FPS, RAM y tiempo de importación en el PC objetivo; no asumir rendimiento por el tamaño del ZIP.
+
+## Próximos recursos
+1. Edificio escolar japonés moderno con interiores y exteriores modulares, de calidad anime/stylized y licencia compatible.
+2. Personajes anime riggeados con expresiones, ropa y animaciones utilizables.
+3. Vegetación secundaria, faroles, bancos, fuentes y mobiliario de calidad coherente.
+4. Animación de pétalos y movimiento sutil de árboles, opcional y escalable.
+
+Cada recurso se evalúa por calidad visual, licencia, formato, tamaño de descarga, texturas, rig/animaciones y compatibilidad real con Godot 3.6.3.
