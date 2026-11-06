@@ -1,27 +1,46 @@
 CARPETA DE MODELOS
 ==================
-Coloca aquí modelos 3D reales exportados como glTF binario (.glb) o glTF (.gltf).
+Coloca aquí modelos 3D reales GLB/GLTF o deja paquetes ZIP en:
+  escuela_online/_descargas/
 
-Ejemplos de nombres esperados por los sistemas actuales:
-  player.glb   -> modelo del personaje, si el sistema de avatar lo utiliza
-  school.glb   -> modelo de campus/escenario, si el cargador lo utiliza
+FLUJO AUTOMÁTICO
+================
+1. Copia paquetes ZIP descargados en escuela_online/_descargas/.
+2. Ejecuta escuela_online/descargar_assets.bat.
+3. El BAT extrae cada ZIP a una subcarpeta de models/.
+4. Abre el proyecto en Godot 3.6.3 y espera la importación.
+5. Models.gd busca recursivamente archivos .glb/.gltf y el lobby/escenario
+   seleccionan modelos por palabras clave en el nombre del archivo.
 
-Antes de añadir un modelo, comprueba su licencia, escala, materiales, texturas y compatibilidad con Godot 3.6.3. No basta con que el archivo sea pequeño: debe cumplir la dirección artística anime 3D moderna.
+Consulta DESCARGA_MODELOS.md para sitios, licencias, nombres reconocidos y
+reglas para que el proyecto identifique personajes y escenarios.
 
-ANIMACIONES
-===========
-Cuando el personaje tenga esqueleto y animaciones, conserva nombres compatibles con el controlador:
-  idle    -> reposo
-  run     -> correr (o walk si el controlador lo admite)
-  roll    -> esquivar (opcional)
-  attack  -> golpe (opcional)
+PERSONAJES
+==========
+Usa archivos de cuerpo completo con nombres que incluyan, por ejemplo:
+  character, student, fullbody, body, player, avatar, humanoid, girl, boy.
+Deben tener esqueleto y animaciones compatibles (idle, run/walk, attack).
+Piezas sueltas como pelo, ojos, ropa o armas no son personajes completos.
 
-No reemplaces personajes finales con cápsulas o geometría de prueba. Los modelos deben tener rig y animaciones compatibles con el sistema existente.
+ESCENARIOS
+==========
+Nombres recomendados:
+  school_campus.glb
+  japanese_town.glb
+  shinto_shrine.glb
+  buddhist_temple.glb
+  coast.glb
+  sakura_forest.glb
+  kendo_dojo.glb
 
-MUNDO ABIERTO
-=============
-El proyecto contempla varias regiones conectadas: Sakura Academy, ciudad japonesa, santuarios sintoístas con torii, templos budistas, costa y playas, pueblos, bosques, montañas y lagos.
+Cada archivo debe ser una escena/ensamblado 3D de esa zona, no un prop suelto.
+El cargador no construye automáticamente un campus juntando muebles o piezas.
 
-Los modelos ambientales deben ser assets 3D reales, no edificios, árboles ni mobiliario generados mediante scripts. Para los cerezos, elegir copas abundantes y flores densas; el modelo de cerezo anteriormente propuesto fue rechazado por verse demasiado pelón.
+CALIDAD
+=======
+No usar low poly como estilo artístico ni sustituir assets por geometría
+procedural. Revisar licencia, escala, texturas, rig, animaciones y aspecto
+dentro de Godot antes de aprobar un modelo.
 
-Consulta AMBIENTE_VISUAL.md y SAKURA_ASSETS.md para conocer la dirección artística y los criterios de aceptación.
+El cerezo de Innerscene que se revisó anteriormente está RECHAZADO por su
+copa escasa. No descargarlo ni incorporarlo.
