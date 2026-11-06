@@ -1,17 +1,28 @@
 # Dirección visual y diseño del mundo de Sakura Academy
 
-## Visión general
-Sakura Academy será un mundo abierto japonés de exploración libre, no solamente un campus aislado. La academia será uno de sus centros principales, dentro de una región amplia con ciudad, costa, naturaleza y lugares históricos. Las regiones deben sentirse conectadas y habitadas.
+## Visión general y escala
+Sakura Academy será un mundo abierto de tamaño mediano, compacto y densamente ambientado. **La academia debe ser, con diferencia, la zona más grande, importante e imponente del mapa.** El resto del mundo aportará variedad y lugares memorables, sin competir con la escuela ni crear grandes extensiones vacías.
 
-## Regiones del mundo
-- **Sakura Academy:** campus japonés contemporáneo con aulas, patios, biblioteca, gimnasio, clubes, residencias, cafetería, jardines y zonas deportivas.
-- **Ciudad:** calles comerciales, tiendas, cafeterías, restaurantes, viviendas, apartamentos, estación, plazas, callejones y zonas residenciales.
-- **Santuarios y templos:** santuarios sintoístas con torii, patios y senderos; templos budistas con arquitectura, jardines, campanas y espacios de contemplación. Diferenciar respetuosamente ambos tipos de lugar.
-- **Costa:** playas, muelles, puerto o pueblo pesquero, paseos marítimos, acantilados y miradores.
-- **Naturaleza y pueblos:** bosques, montañas, lagos, ríos, cascadas, caminos rurales y pequeñas poblaciones.
-- **Zonas adicionales:** parques, mercados, festivales, miradores y áreas secretas que puedan incorporarse a medida que crezca el proyecto.
+No se busca un mundo gigantesco por kilómetros. Se busca un mapa continuo o conectado con distancias razonables, recorridos interesantes, buena densidad de detalles, actividades y puntos de interés.
 
-Las regiones se conectarán mediante carreteras, caminos peatonales, rutas naturales y, cuando el diseño lo permita, transporte público. La exploración será libre y habrá puntos de interés, actividades, NPC y eventos.
+## Distribución de regiones
+- **Sakura Academy — zona principal:** el área más extensa y reconocible. Campus con varios edificios, aulas, patios, biblioteca, gimnasio, clubes, residencias, cafetería, zonas deportivas, jardines y espacios interiores/exteriores explorables.
+- **Distrito urbano cercano:** zona compacta con calles comerciales, tiendas, cafeterías, restaurantes, viviendas, estación o plaza y callejones con personalidad.
+- **Zona tradicional:** santuario sintoísta con torii, patios y senderos; templo budista con arquitectura y jardines. Un área cultural atractiva, no una región desproporcionada.
+- **Zona costera:** playa, muelle, paseo marítimo, pequeño puerto o comercios junto al mar.
+- **Zona natural:** bosque de cerezos frondosos, senderos, lago, río, miradores y pequeñas áreas de descanso.
+- **Conexiones:** carreteras, caminos peatonales y rutas naturales cortas que unan las regiones sin convertir los desplazamientos en trayectos interminables.
+
+La academia será el centro social y jugable. Las zonas secundarias funcionarán como destinos de exploración, actividades, eventos y descanso. Cada zona debe tener elementos visuales y actividades suficientes para no sentirse vacía.
+
+## Online como pilar del proyecto
+El juego debe conservar su modo online/multijugador como parte central de su diseño. El mapa, sus regiones y sus actividades deben planearse teniendo en cuenta a varios jugadores simultáneos.
+- Mantener los sistemas de red, sincronización y autoridad existentes.
+- No sustituir ni eliminar el multijugador para implementar el mundo abierto.
+- Las interacciones relevantes, estados compartidos, actividades y eventos deben diseñarse para funcionar correctamente en red.
+- Evitar que la carga de regiones, NPC y efectos locales interfiera con la sincronización.
+- Probar desplazamiento, aparición de jugadores, interacciones y cambios de zona con más de un cliente.
+- No afirmar que el online está probado si no se ha ejecutado una prueba real con varios clientes.
 
 ## Identidad visual
 - Anime 3D moderno y detallado; **no low poly**.
@@ -28,18 +39,19 @@ Todo modelo ambiental o personaje debe evaluarse visualmente antes de aceptarlo.
 
 ## Rendimiento sin degradar el estilo
 - Reutilizar recursos, materiales y atlas donde sea posible.
-- LOD únicamente para objetos lejanos; conservar detalle cerca del jugador.
-- Culling y visibilidad por sectores para no renderizar regiones ocultas.
+- LOD únicamente para objetos lejanos; conservar el modelo detallado cerca del jugador.
+- Culling y visibilidad por sectores para no renderizar zonas ocultas.
 - Texturas con resolución adecuada a su tamaño en pantalla y compresión compatible.
 - Sombras dinámicas selectivas y lightmaps cuando sean viables.
 - Controlar transparencia y overdraw en pétalos, hojas y partículas.
-- Cargar o activar regiones por sectores para gestionar memoria.
-- Medir FPS, RAM y tiempos de importación en el equipo objetivo antes de ampliar el mundo.
+- Cargar o activar regiones por sectores para gestionar memoria y mantener fluido el online.
+- Medir FPS, RAM, tráfico de red y tiempos de importación en el equipo objetivo antes de ampliar el mundo.
 
 ## Restricciones del proyecto
 - Godot 3.6.3 como versión objetivo.
 - Conservar cámara, movimiento y controles existentes.
+- Conservar el modo online y los sistemas de red existentes.
 - No crear edificios, árboles, personajes, mobiliario ni escenarios mediante geometría procedural de scripts.
-- Los scripts sí pueden gestionar lógica, streaming/carga de regiones, visibilidad, interacción, animación, multijugador y efectos.
-- No dar por integrado ni probado ningún asset hasta que exista dentro del proyecto y se haya abierto en Godot.
-- Construir el mundo por regiones compatibles entre sí, evitando intentar cargar todo el mapa a máxima calidad al mismo tiempo.
+- Los scripts sí pueden gestionar lógica, carga de regiones, visibilidad, interacción, animación, multijugador y efectos.
+- No dar por integrado ni probado ningún asset o sistema hasta que exista dentro del proyecto y se haya probado en Godot.
+- Priorizar un mapa mediano, denso y bien conectado sobre un mundo enorme y vacío.
