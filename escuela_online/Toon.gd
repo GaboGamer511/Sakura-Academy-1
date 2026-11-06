@@ -1,34 +1,35 @@
 extends Reference
-# Utilidades de estilo anime: convierte los materiales de un modelo en toon + contorno.
+# Armoniza materiales importados sin destruir sus texturas PBR.
+# No añade geometría ni intenta ocultar siluetas low-poly con contornos.
 
-const TOON_SHADER = preload("res://shaders/toon.shader")
-const OUTLINE_SHADER = preload("res://shaders/outline.shader")
-
-
-static func make_material(src, outline_thickness = 0.02):
-	var m = ShaderMaterial.new()
-	m.shader = TOON_SHADER
-	m.set_shader_param("use_texture", false)
-	if src is SpatialMaterial:
-		m.set_shader_param("albedo", src.albedo_color)
-		if src.albedo_texture:
-			m.set_shader_param("albedo_tex", src.albedo_texture)
-			m.set_shader_param("use_texture", true)
-	if outline_thickness > 0.0:
-		var o = ShaderMaterial.new()
-		o.shader = OUTLINE_SHADER
-		o.set_shader_param("thickness", outline_thickness)
-		m.next_pass = o
-	return m
+static func apply(node, _outline_thickness = 0.0):
+	_polish_recursive(node)
 
 
-# Recorre el nodo y todos sus hijos cambiando los materiales de cada MeshInstance.
-static func apply(node, outline_thickness = 0.02):
+static func _polish_recursive(node):
 	if node is MeshInstance and node.mesh:
 		for i in range(node.mesh.get_surface_count()):
-			var src = node.get_surface_material(i)
-			if src == null:
-				src = node.mesh.surface_get_material(i)
-			node.set_surface_material(i, make_material(src, outline_thickness))
-	for c in node.get_children():
-		apply(c, outline_thickness)
+			var source = node.get_surface_material(i)
+			if source == null:
+				source = node.mesh.surface_get_material(i)
+			var polished = _make_polished_material(source)
+			if polished != null:
+				node.set_surface_material(i, polished)
+
+	for child in node.get_children():
+		_polish_recursive(child)
+
+
+static func _make_polished_material(source):
+	# No reemplazar ShaderMaterial ni materiales desconocidos: podrían contener
+	# lógica propia del asset. Tampoco inventar materiales para superficies vacías.
+	if not (source is SpatialMaterial):
+		return null
+
+	# Duplicar evita modificar el recurso importado compartido por otros modelos.
+	var material = source.duplicate()
+	# Conservar albedo, mapas normal/roughness/metallic, transparencia y emisión.
+	# Solo limitar reflejos excesivos y evitar brillos plásticos en kits estilizados.
+	material.roughness = clamp(material.roughness, 0.58, 0.88)
+	material.specular = min(material.specular, 0.42)
+	return material
