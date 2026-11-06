@@ -12,7 +12,7 @@ var equipped_item = ""
 var quest_stage = 0
 var reputation = 50
 var inventory = []
-var _camera_pitch = 0.349066
+var _camera_pitch = deg2rad(-20.0)
 
 onready var camera_pivot = get_node_or_null("CameraPivot")
 onready var camera = get_node_or_null("CameraPivot/Camera")
@@ -24,6 +24,7 @@ func _ready():
         camera.make_current()
         camera.near = 0.05
         camera.far = 300.0
+        camera.rotation.x = _camera_pitch
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
     if camera:
         print("Sakura Academy | Cámara actual: ", camera.current, " | Posición inicial: ", camera.global_transform.origin, " | Rotación X: ", rad2deg(camera.rotation.x))
@@ -33,7 +34,7 @@ func _ready():
 func _input(event):
     if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and camera_pivot and camera:
         camera_pivot.rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
-        _camera_pitch = clamp(_camera_pitch + deg2rad(event.relative.y * mouse_sensitivity), deg2rad(-35.0), deg2rad(65.0))
+        _camera_pitch = clamp(_camera_pitch + deg2rad(event.relative.y * mouse_sensitivity), deg2rad(-65.0), deg2rad(35.0))
         camera.rotation.x = _camera_pitch
     if event is InputEventKey and event.pressed and not event.echo:
         if event.scancode == KEY_E:
