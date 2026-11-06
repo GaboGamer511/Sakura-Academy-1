@@ -1,0 +1,40 @@
+SAKURA ACADEMY — RECONSTRUCCIÓN DE BASE GODOT 3.6.3
+====================================================
+
+MOTOR Y RENDERIZADOR
+- Godot 3.6.3
+- GLES2
+- Resolución inicial: 1280 x 720
+
+PRIMEROS PASOS — NO OMITAS EL INSTALADOR
+1. Extrae toda la carpeta SakuraAcademy en una ruta simple, por ejemplo C:\Juegos\SakuraAcademy.
+2. El ZIP NO lleva los binarios GLB externos: este entorno de construcción no pudo descargarlos. Ejecuta INSTALAR_MODELOS.bat con conexión a Internet; descargará el campus y los personajes articulados CC0 en tu PC.
+3. Abre project.godot usando Godot 3.6.3 (no Godot 4).
+4. Espera a que el editor termine de importar los GLB. Si habías abierto Main.tscn antes de instalar los modelos, ciérrala y vuelve a abrirla para regenerar la vista previa con los recursos nuevos.
+5. Abre Main.tscn y pulsa F5 para ejecutar el proyecto.
+
+CONTROLES
+WASD: mover en relación con la cámara.
+Shift: correr.
+Espacio: saltar.
+Ratón: rotar libremente la cámara alrededor de la protagonista.
+E: hablar o recoger.
+F: examinar el último objeto.
+Q: mostrar/ocultar objetivo.
+Esc: pausa y liberar/capturar el ratón.
+
+CAMBIOS DE ESTA RECONSTRUCCIÓN
+- Se eliminó la cámara CameraRig independiente que actualizaba su Transform global cada frame.
+- La cámara volvió a ser Player/CameraPivot/Camera, anclada al jugador y con transformación inicial guardada en Main.tscn. Esto recupera la jerarquía de cámara de la versión original que el usuario indicó que sí podía ejecutar.
+- El pivote de cámara gira en yaw de manera independiente del modelo visual; el movimiento WASD se calcula con la base horizontal del pivote.
+- La cámara recupera exactamente la jerarquía del proyecto original: Player/CameraPivot/Camera. La transformación inicial recupera los valores originales: pivote a Y=1.5 y cámara local en (0, 1.8, 3.5), con inclinación X positiva de 20 grados hacia el suelo.
+- Se corrigió el signo de la inclinación: en Godot la cámara mira hacia -Z local, por lo que la rotación X positiva baja la mirada hacia el patio; la versión anterior tenía el signo invertido y podía mirar hacia el cielo.
+- Se mantiene un suelo físico de respaldo y un entorno de color sólido para GLES2.
+- SchoolCampus intenta instanciar el GLB real del campus si se instaló; la construcción geométrica anterior queda como alternativa de compatibilidad para el escenario. Los personajes geométricos se retiraron por completo.
+- CharacterVisual prioriza Schoolkid.glb y busca AnimationPlayer para reproducir Idle/Walk/Run. Se retiraron los GLB geométricos anteriores para no presentarlos como personajes articulados. Si no instalas los recursos, los personajes no se mostrarán y el HUD indicará que faltan.
+
+IMPORTANTE SOBRE LOS MODELOS
+El ZIP no incorpora los binarios GLB externos porque este entorno de construcción no pudo descargarlos. Debes ejecutar INSTALAR_MODELOS.bat con Internet antes de jugar. El instalador descarga los recursos y verifica el encabezado GLB. El campus incluye una escena escolar modular real. El pack humano incluye un personaje escolar riggeado con animaciones. Su estilo es low-poly y no es el acabado anime final de Sakura Academy. El paquete de personajes descargado es un modelo escolar articulado de estilo low-poly; por ahora todos los estudiantes usan ese mismo modelo base. La identidad visual, uniformes y personajes anime personalizados siguen siendo trabajo pendiente. No se presenta este paquete como el juego completo.
+
+VALIDACIÓN
+Se hizo una revisión estática del Main.tscn, scripts y rutas de recursos, y se verificó la integridad estructural del ZIP. Este entorno no tiene ejecutable Godot 3.6.3 instalado, por lo que NO se afirma que el juego haya pasado una ejecución real o una prueba visual en motor. La cámara ahora está configurada en la propia escena y ya no depende de que el script externo resuelva un objetivo para obtener su transform inicial.

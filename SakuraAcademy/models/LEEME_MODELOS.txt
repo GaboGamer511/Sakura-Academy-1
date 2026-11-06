@@ -1,0 +1,5 @@
+MODELOS 3D REALES
+=================
+Ejecuta INSTALAR_MODELOS.bat desde Windows con conexión a Internet.
+El script descarga el campus GLB CC0 y el paquete humano articulado CC0.
+Los personajes geométricos de versiones anteriores se retiraron.

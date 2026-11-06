@@ -1,0 +1,20 @@
+RECURSOS 3D EXTERNOS Y LICENCIAS
+================================
+
+1) Campus Japanese School and City Street
+   Archivo esperado: models/japanese_school_campus.glb
+   Fuente: https://3dassets.dev/packs/japanese-school-and-city-street
+   Descarga directa del starter GLB: https://cdn.3dassets.dev/assets/30098/v1/model.glb
+   Contenido indicado por la ficha: 46 modelos; escuela, patio, aulas, mobiliario, bicicletero, árboles de cerezo y calle japonesa.
+   Licencia indicada: CC0 1.0 Universal.
+
+2) Personajes humanos riggeados Gobkit Character Pack Vol.1
+   Archivo principal esperado: models/characters/Schoolkid.glb
+   Fuente: https://gobkit.com/freebies
+   ZIP directo: https://gobkit.com/freebies/human001/gobkit-human001-pack.zip
+   Incluye 8 personajes GLB humanos articulados. El manifiesto enumera clips Idle, Walk, Run, Death, Hit, Attack y Special.
+   Licencia indicada por la ficha/manifiesto: CC0 1.0.
+
+Los dos recursos son de estilo low-poly. Son modelos 3D externos auténticos y el personaje Schoolkid incluye rig y animaciones, pero NO equivalen todavía al acabado anime de personaje original que se ha definido para Sakura Academy. Son la base de integración para sustituir las mallas estáticas del prototipo mientras se producen/adquieren modelos artísticos finales.
+
+Instalación automática: ejecuta INSTALAR_MODELOS.bat una vez con conexión a Internet. El script comprueba el encabezado GLB y extrae los personajes. Después abre project.godot con Godot 3.6.3 y espera a que el importador termine.
