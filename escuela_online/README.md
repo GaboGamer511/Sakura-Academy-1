@@ -26,11 +26,12 @@ El objetivo es un **mapa mediano, compacto y densamente ambientado**. Sakura Aca
 Consulta:
 - `AMBIENTE_VISUAL.md`: dirección artística, escala, regiones y reglas de desarrollo.
 - `SAKURA_ASSETS.md`: criterios de calidad y recursos aceptables.
+- `DESCARGA_MODELOS.md`: sitios de descarga, nombres de archivos y flujo ZIP → models/ → reconocimiento automático.
 - `MAPA_MUNDO.md`: distribución conceptual y prioridades de construcción.
 - `PERSONAJES.md`: dirección de diseño de personajes.
 
 ## Recursos 3D
-Los modelos se detectan dentro de `models/` en formatos glTF/GLB. Antes de aceptar un recurso hay que revisar calidad visual, licencia, formato, materiales, texturas y compatibilidad con Godot 3.6.3. Un modelo pequeño no es automáticamente adecuado.
+Los modelos se detectan recursivamente dentro de `models/` en formatos glTF/GLB. Coloca los ZIP en `_descargas/` y ejecuta `descargar_assets.bat`; el escáner reconoce modelos por palabras clave en los nombres de archivo. Antes de aceptar un recurso hay que revisar calidad visual, licencia, formato, materiales, texturas y compatibilidad con Godot 3.6.3. Un modelo pequeño no es automáticamente adecuado.
 
 El cerezo de Innerscene revisado anteriormente fue descartado por su copa demasiado escasa. No se debe reutilizar como árbol principal.
 
@@ -41,7 +42,7 @@ El modo online forma parte central del proyecto. Mantener lobby, ENet, sincroniz
 - `Main.gd` / `Main.tscn`: lobby.
 - `Network.gd`: conexión ENet, jugadores y chat.
 - `World.gd` / `World.tscn`: mundo, luz, zonas, NPCs y sistemas de juego.
-- `Level.gd`: construcción/carga del escenario (pendiente de migración completa a escenas y modelos 3D reales).
+- `Level.gd`: carga escenas/escenarios 3D importados y crea colisiones a partir de sus mallas.
 - `Player.gd`: movimiento, cámara y sincronización del jugador.
 - `Avatar.gd`: modelo visual y animaciones.
 - `Models.gd`: búsqueda de modelos.
