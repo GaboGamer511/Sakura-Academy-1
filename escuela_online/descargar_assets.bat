@@ -1,62 +1,39 @@
-@echo off
-chcp 65001 >nul
-setlocal
-cd /d "%~dp0"
+# Sakura Academy — inventario de recursos 3D
 
-echo ==========================================
-echo   Descarga de assets libres (CC0)
-echo ==========================================
-echo.
+## Objetivo
+Un campus japonés de primavera, luminoso y acogedor. Los cerezos en flor deben ser el rasgo visual principal, acompañados de jardines y mobiliario coherentes.
 
-if not exist models mkdir models
-if not exist _descargas mkdir _descargas
+## Primer paquete ambiental seleccionado
 
-rem Compatibilidad con la version anterior del script
-if exist "models\muebles" if not exist "models\kenney_furniturePack" ren "models\muebles" "kenney_furniturePack"
+**Low Poly Trees Pack — Riclmbr**
+- Página de descarga: https://riclmbr.itch.io/low-poly-trees-pack
+- Archivo: `LowPolyTreesPack.zip` (11 MB)
+- Contenido anunciado: 26 modelos de árboles y elementos de naturaleza, incluido Cherry Blossom, arbustos y bonsái.
+- Formato: un GLB con los modelos y tres atlas de textura compartidos.
+- Presupuesto anunciado por el autor: aproximadamente 7.2K triángulos en todo el paquete.
+- Licencia declarada: CC0 1.0; permite uso comercial y modificaciones sin atribución obligatoria.
+- Motivo de selección: tamaño reducido, bajo recuento de triángulos, texturas compartidas y licencia clara.
 
-rem Uso: call :bajar  archivo.zip  URL_directa  carpeta_destino  pagina_de_respaldo
-call :bajar "kenney_furniturePack.zip" "https://opengameart.org/sites/default/files/kenney_furniturePack.zip" "models\kenney_furniturePack" "https://opengameart.org/content/furniture-kit"
+### Instalación
+1. Descarga el ZIP desde la página oficial del autor.
+2. Copia `LowPolyTreesPack.zip` en `escuela_online/_descargas/`.
+3. Ejecuta `descargar_assets.bat`.
+4. El ZIP se extraerá en `escuela_online/models/LowPolyTreesPack/`.
+5. Abre Godot y deja que importe únicamente este paquete nuevo.
 
-echo.
-echo ------------------------------------------
-echo Descomprimiendo todo .zip de _descargas que aun no este en models\ ...
-echo ------------------------------------------
-powershell -NoProfile -Command "Get-ChildItem -LiteralPath '_descargas' -Filter *.zip | ForEach-Object { $n = ($_.BaseName -replace '[\[\]]',''); $dest = Join-Path 'models' $n; if (-not (Test-Path -LiteralPath $dest)) { Write-Host ('Extrayendo ' + $_.Name); Expand-Archive -LiteralPath $_.FullName -DestinationPath $dest -Force } else { Write-Host ('Ya extraido: ' + $_.Name) } }"
+El paquete todavía no se incluye como binario en Git: la conexión de edición del repositorio permite escribir archivos de texto, pero no transferir el ZIP binario desde itch.io. No se debe afirmar que los modelos ya están instalados hasta que el archivo exista en `models/` y Godot lo haya importado.
 
-echo.
-echo Ajustes para que Godot importe rapido: se ignoran packs que la beta aun no usa...
-for /d %%D in (models\kenney_modular*) do if not exist "%%D\.gdignore" type nul > "%%D\.gdignore"
-for /d %%D in (models\Universal*Animation*) do if not exist "%%D\.gdignore" type nul > "%%D\.gdignore"
-if exist ".import" echo (Godot ya tiene una cache de importacion; solo reimportara lo nuevo)
-echo.
-echo Si te faltan packs, descargalos de estas paginas, ponlos en _descargas y
-echo ejecuta este archivo otra vez:
-echo   https://kenney-assets.itch.io/modular-buildings
-echo   https://quaternius.com/packs/universalbasecharacters.html
-echo   https://quaternius.com/packs/universalanimationlibrary.html
-echo.
-echo Pack de naturaleza Sakura recomendado (11 MB, licencia CC0):
-echo   https://riclmbr.itch.io/low-poly-trees-pack
-echo Descarga LowPolyTreesPack.zip y colocalo en _descargas.
-echo Ejecuta este .bat otra vez para extraerlo en models\LowPolyTreesPack.
-echo.
-echo Listo. Abre Godot y deja que reimporte los archivos.
-pause
-goto :eof
+## Presupuesto de importación
+- Incorporar un paquete pequeño y comprobado antes de sumar otro.
+- No descargar colecciones completas de personajes, edificios y animaciones si no se van a utilizar.
+- Mantener los ZIP originales en `_descargas/` para no volver a descargarlos.
+- No importar variantes de 4K ni duplicados de texturas si existe un atlas compartido.
+- Probar el tiempo de importación y el uso de memoria en Godot 3.6.3 antes de añadir más recursos.
 
-:bajar
-if exist "%~3" (
-  echo Ya existe %~3, se omite la descarga de %~1
-  exit /b
-)
-echo Descargando %~1 ...
-powershell -NoProfile -Command "[Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12; try { Invoke-WebRequest -Uri '%~2' -OutFile '_descargas\%~1' -UseBasicParsing; if ((Get-Item -LiteralPath '_descargas\%~1').Length -lt 100000) { exit 1 } } catch { exit 1 }"
-if errorlevel 1 (
-  echo [!] No se pudo descargar %~1 automaticamente. Abriendo la pagina...
-  del "_descargas\%~1" >nul 2>&1
-  start "" "%~4"
-  exit /b
-)
-powershell -NoProfile -Command "Expand-Archive -LiteralPath '_descargas\%~1' -DestinationPath '%~3' -Force"
-echo [OK] %~1 -^> %~3
-exit /b
+## Siguientes recursos a buscar
+1. Edificio escolar modular o campus japonés de bajo peso.
+2. Bancos, faroles, macetas y mobiliario exterior.
+3. Modelos de personajes anime riggeados con animaciones compatibles.
+4. Efectos de pétalos opcionales y limitados.
+
+Cada recurso nuevo debe tener formato, tamaño, licencia y compatibilidad verificados antes de añadirse.
